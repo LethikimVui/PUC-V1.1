@@ -1,0 +1,67 @@
+﻿@{
+    ViewData["Title"] = "Add Fixture";
+    var customers = ViewData["customers"] as IEnumerable<SharedObjects.ValueObjects.VCustomer>;
+}
+<div class="container-fluid">
+    <div class="row">
+
+        <div class="col-md-12">
+
+            <!-- BEGIN EXAMPLE TABLE PORTLET-->
+            <div class="portlet light" style="min-height: auto !important;height: auto !important">
+                <div class="portlet-title">
+
+                    <div class="caption col-md-12">
+                        <span class="caption-subject font-green-sharp bold uppercase">
+                            Add Machine / Fixture
+                        </span>
+                    </div>
+
+                    <div class="col-md-2 pull-left">
+                        <label class="text-center bold font-green-sharp" for="">Customer</label>
+                        <select class="form-control" id="txt-customer" style="height: 34px !important; color: mediumvioletred">
+                            <option value="">--Please Select--</option>
+
+                            @foreach (var item in customers.OrderByDescending(c => c.CustId).ToList())
+                            {
+                                <option value=@item.CustId>@item.CustName</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label class="text-center bold font-green-sharp" for="">Fixture ID</label>
+                        <label class="control-label"></label>
+                        <input id="txt-machine" class="form-control col-md-3" style="color: mediumvioletred" />
+                    </div>
+
+                    <div class="form-group col-md-2">
+                        <label class="text-center bold font-green-sharp" for="">Serial Number</label>
+                        <label class="control-label"></label>
+                        <input id="txt-serialNumber" class="form-control col-md-3" style="color: mediumvioletred" />
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label class="text-center bold font-green-sharp" for="">Part Number</label>
+                        <label class="control-label"></label>
+                        <input id="txt-partNumber" class="form-control col-md-3" style="color: mediumvioletred" />
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label class="text-center bold font-green-sharp" for="">Fixture Description</label>
+                        <label class="control-label"></label>
+                        <input id="txt-description" class="form-control col-md-3" style="color: mediumvioletred" />
+                    </div>
+                    <div class="form-group col-md-12">
+                        <a class="btn btn-success" id="btn-add">Add</a>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+
+
+@section Script{
+    <script src="~/js/main-add.js"></script>
+}
