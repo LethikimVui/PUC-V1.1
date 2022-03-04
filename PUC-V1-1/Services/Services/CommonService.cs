@@ -37,9 +37,15 @@ namespace Services.Services
             return machine;
         }
 
-        public Task<List<VCategory>> Master_Category_get()
+        public async Task<List<VCategory>> Master_Category_get()
         {
-            throw new NotImplementedException();
+            List<VCategory> categories = new List<VCategory>();
+            using (var response = await httpClient.GetAsync("api/common/Master_Category_get"))
+            {
+                var apiResponse = await response.Content.ReadAsStringAsync();
+                categories = JsonConvert.DeserializeObject<List<VCategory>>(apiResponse);
+            }
+            return categories;
         }
 
         public async Task<List<VReason>> Master_Reason_Get()
@@ -58,9 +64,15 @@ namespace Services.Services
             throw new NotImplementedException();
         }
 
-        public Task<List<VSupplier>> Master_Supplier_get()
+        public async Task<List<VSupplier>> Master_Supplier_get()
         {
-            throw new NotImplementedException();
+            List<VSupplier> suppliers = new List<VSupplier>();
+            using (var response = await httpClient.GetAsync("api/common/Master_Supplier_get"))
+            {
+                var apiResponse = await response.Content.ReadAsStringAsync();
+                suppliers = JsonConvert.DeserializeObject<List<VSupplier>>(apiResponse);
+            }
+            return suppliers;
         }
     }
 }

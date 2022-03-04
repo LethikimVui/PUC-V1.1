@@ -47,16 +47,30 @@ namespace API.Controllers
         {
             try
             {
-                if (!(context.Main.Where(x => x.MachineId == model.MachineId).ToList().Any()))
+                if (!(context.Main.Where(x => x.MachineName == model.MachineName).ToList().Any()))
                 {
 
-                    await context.Database.ExecuteSqlCommandAsync(SPMain.Main_Add, model.CustId, model.MachineId, model.SerialNumber, model.PartNumber, model.Description, model.CreatedBy);
+                    await context.Database.ExecuteSqlCommandAsync(SPMain.Main_Add, model.CustId, model.MachineName, model.SerialNumber, model.PartNumber, model.Description, model.CreatedBy);
                     return Ok(new ResponseResult(200, "Machine added successfully"));
                 }
                 else
                 {
                     return Conflict(new ResponseResult(409, "Machine " + model.MachineName + " already exsiting"));
                 }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new ResponseResult(400, ex.Message));
+            }
+        }
+        [HttpPost("Main_Delete")]
+        [Obsolete("Use newMethod instead", false)]
+        public async Task<IActionResult> Main_Delete([FromBody] DetailViewModel model)
+        {
+            try
+            {
+                await context.Database.ExecuteSqlCommandAsync(SPMain.Main_Delete, model.MachineId, model.UpdatedBy);
+                return Ok(new ResponseResult(200, "Machine deleted successfully"));
             }
             catch (Exception ex)
             {

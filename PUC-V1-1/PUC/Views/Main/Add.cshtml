@@ -1,5 +1,5 @@
 ﻿@{
-    ViewData["Title"] = "Add Fixture";
+    ViewData["Title"] = "Add";
     var customers = ViewData["customers"] as IEnumerable<SharedObjects.ValueObjects.VCustomer>;
 }
 <div class="container-fluid">
@@ -29,7 +29,7 @@
                         </select>
                     </div>
                     <div class="form-group col-md-2">
-                        <label class="text-center bold font-green-sharp" for="">Fixture ID</label>
+                        <label class="text-center bold font-green-sharp" for="">Fixture / Machine</label>
                         <label class="control-label"></label>
                         <input id="txt-machine" class="form-control col-md-3" style="color: mediumvioletred" />
                     </div>
@@ -45,7 +45,7 @@
                         <input id="txt-partNumber" class="form-control col-md-3" style="color: mediumvioletred" />
                     </div>
                     <div class="form-group col-md-2">
-                        <label class="text-center bold font-green-sharp" for="">Fixture Description</label>
+                        <label class="text-center bold font-green-sharp" for="">Description</label>
                         <label class="control-label"></label>
                         <input id="txt-description" class="form-control col-md-3" style="color: mediumvioletred" />
                     </div>

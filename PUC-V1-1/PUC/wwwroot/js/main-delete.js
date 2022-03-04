@@ -1,32 +1,22 @@
 ﻿$(document).ready(function () {
-    $('body').off('click', '#btn-add').on('click', '#btn-add', Add);
+    $('body').off('click', '#btn-add').on('click', '#btn-delete', Delete);
     var user = document.getElementById('userinfo').getAttribute('data-user');
 
-    function Add() {
-        var custId = $("#txt-customer").val();
-        var machine = document.getElementById('txt-machine').value.trim();
-        var serialNumber = document.getElementById('txt-serialNumber').value.trim();
-        var partNumber = document.getElementById('txt-partNumber').value.trim();
-        var description = document.getElementById('txt-description').value.trim();
+    function Delete() {
+        var machineId = $("#txt-machineId").val();
         debugger
-        if (custId && machine && (serialNumber || partNumber)) {
+        if (machineId) {
             var model = new Object();
-            model.CustId = parseInt(custId);
-            model.MachineName = machine.toUpperCase();
-            model.SerialNumber = serialNumber.toUpperCase();
-            model.PartNumber = partNumber.toUpperCase();
-            model.Description = description;
-            model.CreatedBy = user;
+            model.MachineId = parseInt(machineId);
+            model.UpdatedBy = user;
             $.ajax({
                 type: 'post',
-                url: '/Main/Main_Add',
+                url: '/Main/Main_Delete',
                 data: JSON.stringify(model),
                 contentType: "application/json; charset=utf-8",
                 success: function (response) {
-
                     var statusCode = response.results.statusCode;
                     var message = response.results.message;
-
                     if (statusCode == 200) {
                         bootbox.alert(message, function () { Reset() });
                     }
@@ -40,7 +30,7 @@
             })
         }
         else {
-            bootbox.alert("Please make sure Customer / Machine Name / Fixture ID / Part Number /  is provided");
+            bootbox.alert("Please make sure Customer / Machine Name / Fixture ID / Part Number is provided");
         }
     }
     function Reset() {

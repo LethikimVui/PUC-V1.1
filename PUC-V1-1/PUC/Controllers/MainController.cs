@@ -47,14 +47,23 @@ namespace PUC.Controllers
             var Ntlogin = User.GetSpecificClaim("Ntlogin");
             var custId = User.GetSpecificClaim("CustId");
             ViewData["customers"] = await commonService.Customer_get(Ntlogin);
-            ViewData["suppliers"] = await commonService.Master_Supplier_get();
-            ViewData["categories"] = await commonService.Master_Category_get();
+            return View();
+        }
+        public async Task<IActionResult> Delete()
+        {
+            var Ntlogin = User.GetSpecificClaim("Ntlogin");
+            var custId = User.GetSpecificClaim("CustId");
+            ViewData["customers"] = await commonService.Customer_get(Ntlogin);
             ViewData["machineName"] = await commonService.Main_MachineName_get(int.Parse(custId));
             return View();
         }
         public async Task<IActionResult> Main_Add([FromBody] DetailViewModel model)
         {
             var result = await mainService.Main_Add(model);
+            return Json(new { results = result });
+        }  public async Task<IActionResult> Main_Delete([FromBody] DetailViewModel model)
+        {
+            var result = await mainService.Main_Delete(model);
             return Json(new { results = result });
         }
         public async Task<IActionResult> Log_get([FromBody] LogViewModel model)

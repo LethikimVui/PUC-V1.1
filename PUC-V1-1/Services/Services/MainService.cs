@@ -49,5 +49,17 @@ namespace Services.Services
             }
             return responseResult;
         }
+
+        public async Task<ResponseResult> Main_Delete(DetailViewModel model)
+        {
+          StringContent content = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json");
+            ResponseResult responseResult = new ResponseResult();
+            using (var response = await httpClient.PostAsync("api/main/Main_Delete", content))
+            {
+                var apiResponse = await response.Content.ReadAsStringAsync();
+                responseResult = JsonConvert.DeserializeObject<ResponseResult>(apiResponse);
+            }
+            return responseResult;
+        }
     }
 }

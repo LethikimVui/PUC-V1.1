@@ -11,11 +11,13 @@
     <meta content="" name="author" />
     <title>@ViewData["Title"]</title>
 
+
     <!-- BEGIN GLOBAL MANDATORY STYLES -->
-
+    <!-- BEGIN CSS OWN FILES -->
+    <link href="~/css/multipleSelection.css" rel="stylesheet" />
     <link href="~/css/loading.css" rel="stylesheet" />
+    <!-- END PCSS OWN FILES -->
 
-    <link href="~/assets/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link href="~/assets/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="~/assets/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css">
     <link href="~/assets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
@@ -32,149 +34,108 @@
     <link href="~/assets/admin/layout3/css/themes/default.css" rel="stylesheet" type="text/css" id="style_color">
     <link href="~/assets/admin/layout3/css/custom.css" rel="stylesheet" type="text/css">
 
-    <!-- Bootstrap core CSS -->
-   @*<link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">*@
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.7.5/css/bootstrap-select.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.7.5/js/bootstrap-select.min.js"></script>
+    <link rel="shortcut icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico">
+    <link rel="mask-icon" type="" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-8f3771b1072e3c38bd662872f6b673a722f4b3ca2421637d5596661b4e2132cc.svg" color="#111">
+    <link rel="canonical" href="https://codepen.io/GreenSock/pen/BaarZmV">
 
-    <style>
-        .bd-placeholder-img {
-            font-size: 1.125rem;
-            text-anchor: middle;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            user-select: none;
-        }
+    <script src="~/assets/global/plugins/jquery.min.js" type="text/javascript"></script>
 
-        .error {
-            color: red;
-        }
-    </style>
+    <!-- END THEME STYLES -->
+    <!-- BEGIN READ EXCEL FILE BY JAVASCRIPT -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/jszip.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/xlsx.js"></script>
+    <!-- END READ EXCEL FILE BY JAVASCRIPT -->
+    <!-- BEGIN Excel download -->
+    <script src="~/js/filesaver.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+    <!-- END Excel download -->
 
-  
 </head>
 <!-- END HEAD -->
 <!-- BEGIN BODY -->
 <!-- DOC: Apply "page-header-menu-fixed" class to set the mega menu fixed  -->
 <!-- DOC: Apply "page-header-top-fixed" class to set the top menu fixed  -->
-<body>
+<body class="page-md" id="body">
     <div id="loading" style="display:none">
         <img src="~/ajax-loader.gif" alt="Loading..." />
     </div>
-    <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
-        <symbol id="bootstrap" viewBox="0 0 118 94">
-            <title>Bootstrap</title>
-            <path fill-rule="evenodd" clip-rule="evenodd" d="M24.509 0c-6.733 0-11.715 5.893-11.492 12.284.214 6.14-.064 14.092-2.066 20.577C8.943 39.365 5.547 43.485 0 44.014v5.972c5.547.529 8.943 4.649 10.951 11.153 2.002 6.485 2.28 14.437 2.066 20.577C12.794 88.106 17.776 94 24.51 94H93.5c6.733 0 11.714-5.893 11.491-12.284-.214-6.14.064-14.092 2.066-20.577 2.009-6.504 5.396-10.624 10.943-11.153v-5.972c-5.547-.529-8.934-4.649-10.943-11.153-2.002-6.484-2.28-14.437-2.066-20.577C105.214 5.894 100.233 0 93.5 0H24.508zM80 57.863C80 66.663 73.436 72 62.543 72H44a2 2 0 01-2-2V24a2 2 0 012-2h18.437c9.083 0 15.044 4.92 15.044 12.474 0 5.302-4.01 10.049-9.119 10.88v.277C75.317 46.394 80 51.21 80 57.863zM60.521 28.34H49.948v14.934h8.905c6.884 0 10.68-2.772 10.68-7.727 0-4.643-3.264-7.207-9.012-7.207zM49.948 49.2v16.458H60.91c7.167 0 10.964-2.876 10.964-8.281 0-5.406-3.903-8.178-11.425-8.178H49.948z"></path>
-        </symbol>
-        <symbol id="home" viewBox="0 0 16 16">
-            <path d="M8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4.5a.5.5 0 0 0 .5-.5v-4h2v4a.5.5 0 0 0 .5.5H14a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146zM2.5 14V7.707l5.5-5.5 5.5 5.5V14H10v-4a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v4H2.5z"></path>
-        </symbol>
-        <symbol id="speedometer2" viewBox="0 0 16 16">
-            <path d="M8 4a.5.5 0 0 1 .5.5V6a.5.5 0 0 1-1 0V4.5A.5.5 0 0 1 8 4zM3.732 5.732a.5.5 0 0 1 .707 0l.915.914a.5.5 0 1 1-.708.708l-.914-.915a.5.5 0 0 1 0-.707zM2 10a.5.5 0 0 1 .5-.5h1.586a.5.5 0 0 1 0 1H2.5A.5.5 0 0 1 2 10zm9.5 0a.5.5 0 0 1 .5-.5h1.5a.5.5 0 0 1 0 1H12a.5.5 0 0 1-.5-.5zm.754-4.246a.389.389 0 0 0-.527-.02L7.547 9.31a.91.91 0 1 0 1.302 1.258l3.434-4.297a.389.389 0 0 0-.029-.518z"></path>
-            <path fill-rule="evenodd" d="M0 10a8 8 0 1 1 15.547 2.661c-.442 1.253-1.845 1.602-2.932 1.25C11.309 13.488 9.475 13 8 13c-1.474 0-3.31.488-4.615.911-1.087.352-2.49.003-2.932-1.25A7.988 7.988 0 0 1 0 10zm8-7a7 7 0 0 0-6.603 9.329c.203.575.923.876 1.68.63C4.397 12.533 6.358 12 8 12s3.604.532 4.923.96c.757.245 1.477-.056 1.68-.631A7 7 0 0 0 8 3z"></path>
-        </symbol>
-        <symbol id="table" viewBox="0 0 16 16">
-            <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm15 2h-4v3h4V4zm0 4h-4v3h4V8zm0 4h-4v3h3a1 1 0 0 0 1-1v-2zm-5 3v-3H6v3h4zm-5 0v-3H1v2a1 1 0 0 0 1 1h3zm-4-4h4V8H1v3zm0-4h4V4H1v3zm5-3v3h4V4H6zm4 4H6v3h4V8z"></path>
-        </symbol>
-        <symbol id="people-circle" viewBox="0 0 16 16">
-            <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"></path>
-            <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"></path>
-        </symbol>
-        <symbol id="grid" viewBox="0 0 16 16">
-            <path d="M1 2.5A1.5 1.5 0 0 1 2.5 1h3A1.5 1.5 0 0 1 7 2.5v3A1.5 1.5 0 0 1 5.5 7h-3A1.5 1.5 0 0 1 1 5.5v-3zM2.5 2a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 1h3A1.5 1.5 0 0 1 15 2.5v3A1.5 1.5 0 0 1 13.5 7h-3A1.5 1.5 0 0 1 9 5.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zM1 10.5A1.5 1.5 0 0 1 2.5 9h3A1.5 1.5 0 0 1 7 10.5v3A1.5 1.5 0 0 1 5.5 15h-3A1.5 1.5 0 0 1 1 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 9h3a1.5 1.5 0 0 1 1.5 1.5v3a1.5 1.5 0 0 1-1.5 1.5h-3A1.5 1.5 0 0 1 9 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3z"></path>
-        </symbol>
-    </svg>
 
-    <main>
-        <header>
-            <div class="px-3 py-0 bg-success text-white">
-                <div class="container">
-                    <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-                        <a href="/" class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none">
-                            <svg class="bi me-2" width="40" height="25" role="img" aria-label="Bootstrap"></svg>
-                        </a>
+    <!-- BEGIN HEADER -->
 
-                        <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
+    <header class="header-area overlay">
+        <nav class="navbar navbar-expand-md navbar-dark">
+            <div class="container">
+                <a href="#" class="navbar-brand">Bootdey.com</a>
 
-                            <li>
-                                <a href="#" class="nav-link text-white">
-                                    <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#speedometer2"></use></svg>
-                                    Dashboard
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="nav-link text-white">
-                                    <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#table"></use></svg>
-                                    Maintenance
-                                </a>
-                            </li>
+                <button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#main-nav">
+                    <span class="menu-icon-bar"></span>
+                    <span class="menu-icon-bar"></span>
+                    <span class="menu-icon-bar"></span>
+                </button>
 
-                            <li class="dropdown">
-                                <a class="nav-link text-white" data-toggle="dropdown">
-                                    <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#grid"></use></svg>
-                                    Configuration
-                                </a>
-                                <div class="dropdown-menu">
-                                    <a class="dropdown-item" asp-action="Add" asp-controller="Main">Add Machine / Fixture</a>
-                                    <a class="dropdown-item" asp-action="Remove" asp-controller="Main">Remove Machine / Fixture</a>
-                                    <a class="dropdown-item" asp-action="Add" asp-controller="Detail">Add Detail Part</a>
-                                    <a class="dropdown-item" asp-action="Add" asp-controller="Common">Add Reason</a>
-                                </div>
-
-                            </li>
-
-                            <li>
-                                <a href="#" class="nav-link text-white">
-                                    <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#people-circle"></use></svg>
-                                    Administration
-                                </a>
-                            </li>
-                            <li>
-                                @if (User.Identity.IsAuthenticated)
-                                {
-                                    <p id="userinfo" class="nav-link text-white" data-user="@User.GetSpecificClaim("Ntlogin")">
-                                        Hi @User.GetSpecificClaim("UserName") (@User.GetSpecificClaim("Ntlogin"))
-                                        <a asp-action="Logout" asp-controller="Account" class="nav-link text-white">
-                                            <i class="icon-key"></i> Log Out
-                                        </a>
-                                    </p>
-
-                                }
-                                else
-                                {
-                                    <a asp-action="Login" asp-controller="Account" class="nav-link text-white">
-                                        <svg class="bi d-block mx-auto mb-1" width="24" height="24"></svg>
-                                        Login
-                                    </a>
-                                }
-
-                            </li>
-                        </ul>
-                    </div>
+                <div id="main-nav" class="collapse navbar-collapse">
+                    <ul class="navbar-nav ml-auto">
+                        <li><a href="#" class="nav-item nav-link active">Home</a></li>
+                        <li><a href="#" class="nav-item nav-link">About Us</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="nav-item nav-link" data-toggle="dropdown">Services</a>
+                            <div class="dropdown-menu">
+                                <a href="#" class="dropdown-item">Dropdown Item 1</a>
+                                <a href="#" class="dropdown-item">Dropdown Item 2</a>
+                                <a href="#" class="dropdown-item">Dropdown Item 3</a>
+                            </div>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="nav-item nav-link" data-toggle="dropdown">Portfolio</a>
+                            <div class="dropdown-menu">
+                                <a href="#" class="dropdown-item">Dropdown Item 1</a>
+                                <a href="#" class="dropdown-item">Dropdown Item 2</a>
+                                <a href="#" class="dropdown-item">Dropdown Item 3</a>
+                                <a href="#" class="dropdown-item">Dropdown Item 4</a>
+                                <a href="#" class="dropdown-item">Dropdown Item 5</a>
+                            </div>
+                        </li>
+                        <li><a href="#" class="nav-item nav-link">Contact</a></li>
+                    </ul>
                 </div>
             </div>
+        </nav>
 
-        </header>
-        @RenderBody()
-        <div class="scroll-to-top">
-            <i class="icon-arrow-up"></i>
+        <div class="banner">
+            <div class="container">
+                <h1>Bootstrap 4 Navbar</h1>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec elit ex. Etiam elementum lectus et tempor molestie.</p>
+                <a href="#content" class="button button-primary">Learn More</a>
+            </div>
         </div>
-        <!--<footer class="text-center text-white fixed-bottom" style="background-color: #21081a;">-->
+    </header>
 
-            <!-- Copyright -->
-            <!--<div class="text-center p-2" style="background-color: rgb(8 121 8 / 0.20);">
-                TE Support Website:
-                <a class="text-white" href="http://vnhcmm0teapp03/JVNTestSupport/Home.aspx#">JVNTestSupport/Home.aspx</a>
-            </div>-->
-            <!-- Copyright -->
-        <!--</footer>-->
+    <main>
+        <section id="content" class="content">
+            <div class="container">
+                <div class="row">
 
+                    <!-- RenderBody()-->
+                    @RenderBody()
+
+                    <!--Modal arear-->
+
+                </div>
+            </div>
+        </section>
     </main>
 
+    <!-- BEGIN FOOTER -->
+    <div class="page-footer">
+        <div class="container">
+            Jabil
+        </div>
 
-    <script src="~/assets/dist/js/bootstrap.bundle.min.js"></script>
+    </div>
+    <div class="scroll-to-top">
+        <i class="icon-arrow-up"></i>
+    </div>
 
     <script src="~/assets/global/plugins/jquery.min.js"></script>
     <script src="~/js/jquery-validation/jquery.validate.min.js"></script>
@@ -191,18 +152,20 @@
     <script src="~/assets/global/plugins/jquery.cokie.min.js" type="text/javascript"></script>
     <script src="~/assets/global/plugins/uniform/jquery.uniform.min.js" type="text/javascript"></script>
 
+
+    <!-- END CORE PLUGINS -->
     <!-- BEGIN PAGE LEVEL PLUGINS -->
     <script type="text/javascript" src="~/assets/global/plugins/select2/select2.min.js"></script>
     <script type="text/javascript" src="~/assets/global/plugins/datatables/media/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" src="~/assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js"></script>
-
+    <!-- END PAGE LEVEL PLUGINS -->
+    <!-- BEGIN PAGE LEVEL SCRIPTS -->
     <script src="~/assets/global/scripts/metronic.js" type="text/javascript"></script>
     <script src="~/assets/admin/layout3/scripts/layout.js" type="text/javascript"></script>
     <script src="~/assets/admin/layout3/scripts/demo.js" type="text/javascript"></script>
-
     <!-- BEGIN PAGE LEVEL SCRIPTS -->
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <!-- BEGIN PAGE LEVEL SCRIPTS -->
+    <!-- BEGIddsdsdsN PAGE LEVEL SCRIPTS -->
     <script>
         jQuery(document).ready(function () {
             Metronic.init(); // init metronic core components
@@ -210,15 +173,16 @@
             Demo.init(); // init demo features
         });
     </script>
-    <!-- START MULTISELECTION -->
+    <!-- BEGIN IDLE SECTION -->
 
-    <script src="~/src/dropdownCheckboxes.js"></script>
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-    <!-- END MULTISELECTION -->
+    <script src="~/js/site.js"></script>
+    <!-- END IDLE SECTION -->
     <script src="~/js/bootbox.js/bootbox.js"></script>
     <script src="~/js/jquery-validation/jquery.validate.js"></script>
     <script src="~/js/twbs-pagination/jquery.twbsPagination.js"></script>
+
     @RenderSection("Script", false)
+
 </body>
 <!-- END BODY -->
 </html>

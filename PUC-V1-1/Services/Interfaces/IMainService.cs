@@ -14,5 +14,6 @@ namespace Services.Interfaces
         Task<List<VMain>> Main_Get(DetailViewModel model);
         Task<int> Main_Count(DetailViewModel model);
         Task<ResponseResult> Main_Add(DetailViewModel model);
+        Task<ResponseResult> Main_Delete(DetailViewModel model);
     }
 }

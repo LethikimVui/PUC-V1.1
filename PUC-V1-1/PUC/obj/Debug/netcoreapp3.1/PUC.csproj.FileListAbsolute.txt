@@ -185,6 +185,7 @@ C:\Users\1099969\OneDrive - Jabil\Desktop\Development_Project\Web\GitHub\PUC-V1.
 C:\Users\1099969\OneDrive - Jabil\Desktop\Development_Project\Web\GitHub\PUC-V1.1\PUC-V1-1\PUC\obj\Debug\netcoreapp3.1\Razor\Views\Main\Main_Get.cshtml.g.cs
 C:\Users\1099969\OneDrive - Jabil\Desktop\Development_Project\Web\GitHub\PUC-V1.1\PUC-V1-1\PUC\obj\Debug\netcoreapp3.1\Razor\Views\Main\Add.cshtml.g.cs
 C:\Users\1099969\OneDrive - Jabil\Desktop\Development_Project\Web\GitHub\PUC-V1.1\PUC-V1-1\PUC\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_Layout2.cshtml.g.cs
-C:\Users\1099969\OneDrive - Jabil\Desktop\Development_Project\Web\GitHub\PUC-V1.1\PUC-V1-1\PUC\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_Layout1.cshtml.g.cs
 C:\Users\1099969\OneDrive - Jabil\Desktop\Development_Project\Web\GitHub\PUC-V1.1\PUC-V1-1\PUC\obj\Debug\netcoreapp3.1\Razor\Views\Detail\Get.cshtml.g.cs
 C:\Users\1099969\OneDrive - Jabil\Desktop\Development_Project\Web\GitHub\PUC-V1.1\PUC-V1-1\PUC\obj\Debug\netcoreapp3.1\Razor\Views\Main\Log_get.cshtml.g.cs
+C:\Users\1099969\OneDrive - Jabil\Desktop\Development_Project\Web\GitHub\PUC-V1.1\PUC-V1-1\PUC\obj\Debug\netcoreapp3.1\Razor\Views\Main\Delete.cshtml.g.cs
+C:\Users\1099969\OneDrive - Jabil\Desktop\Development_Project\Web\GitHub\PUC-V1.1\PUC-V1-1\PUC\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_Layoutnew.cshtml.g.cs

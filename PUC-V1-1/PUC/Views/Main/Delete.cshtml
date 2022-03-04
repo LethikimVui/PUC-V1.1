@@ -1,0 +1,59 @@
+﻿@{
+    ViewData["Title"] = "Delete";
+    var customers = ViewData["customers"] as IEnumerable<SharedObjects.ValueObjects.VCustomer>;
+    var machineName = ViewData["machineName"] as IEnumerable<SharedObjects.ValueObjects.VMachineName>;
+}
+<div class="container-fluid">
+    <div class="row">
+
+        <div class="col-md-12">
+
+            <!-- BEGIN EXAMPLE TABLE PORTLET-->
+            <div class="portlet light" style="min-height: auto !important;height: auto !important">
+                <div class="portlet-title">
+
+                    <div class="caption col-md-12">
+                        <span class="caption-subject font-green-sharp bold uppercase">
+                            Delete Machine / Fixture
+                        </span>
+                    </div>
+
+                    <div class="form-group col-md-2 pull-left">
+                        <label class="text-center bold font-green-sharp" for="">Customer</label>
+                        <select class="form-control" id="txt-customer" style="height: 34px !important; color: mediumvioletred">
+                            <option value="">--Please Select--</option>
+
+                            @foreach (var item in customers.OrderByDescending(c => c.CustId).ToList())
+                            {
+                                <option value=@item.CustId>@item.CustName</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="form-group col-md-2 pull-left">
+                        <label class="text-center bold font-green-sharp" for="">Machine / Fixture ID</label>
+                        <select class="form-control" id="txt-machineId" style="height: 34px !important; color: mediumvioletred">
+                            <option value="">--Please Select--</option>
+
+                            @foreach (var item in machineName.OrderByDescending(c => c.MachineId).ToList())
+                            {
+                                <option value=@item.MachineId>@item.MachineName</option>
+                            }
+                        </select>
+                    </div>
+
+                    <div class="form-group col-md-12">
+                        <a class="btn btn-success" id="btn-delete">Delete</a>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+
+
+@section Script{
+    <script src="~/js/main-delete.js"></script>
+}
