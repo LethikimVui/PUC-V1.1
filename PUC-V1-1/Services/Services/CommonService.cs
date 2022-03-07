@@ -37,6 +37,18 @@ namespace Services.Services
             return machine;
         }
 
+        public async Task<ResponseResult> Master_Category_delete(CommonViewModel model)
+        {
+            ResponseResult responseResult = new ResponseResult();
+            StringContent content = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json");
+            using (var response = await httpClient.PostAsync("api/common/Master_Category_delete", content))
+            {
+                string apiResponse = await response.Content.ReadAsStringAsync();
+                responseResult = JsonConvert.DeserializeObject<ResponseResult>(apiResponse);
+            }
+            return responseResult;
+        }
+
         public async Task<List<VCategory>> Master_Category_get()
         {
             List<VCategory> categories = new List<VCategory>();
@@ -46,6 +58,30 @@ namespace Services.Services
                 categories = JsonConvert.DeserializeObject<List<VCategory>>(apiResponse);
             }
             return categories;
+        }
+
+        public async Task<ResponseResult> Master_Category_insert(CommonViewModel model)
+        {
+            ResponseResult responseResult = new ResponseResult();
+            StringContent content = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json");
+            using (var response = await httpClient.PostAsync("api/common/Master_Category_insert", content))
+            {
+                string apiResponse = await response.Content.ReadAsStringAsync();
+                responseResult = JsonConvert.DeserializeObject<ResponseResult>(apiResponse);
+            }
+            return responseResult;
+        }
+
+        public async Task<ResponseResult> Master_Reason_delete(CommonViewModel model)
+        {
+            ResponseResult responseResult = new ResponseResult();
+            StringContent content = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json");
+            using (var response = await httpClient.PostAsync("api/common/Master_Reason_delete", content))
+            {
+                string apiResponse = await response.Content.ReadAsStringAsync();
+                responseResult = JsonConvert.DeserializeObject<ResponseResult>(apiResponse);
+            }
+            return responseResult;
         }
 
         public async Task<List<VReason>> Master_Reason_Get()
@@ -59,9 +95,33 @@ namespace Services.Services
             return reasons;
         }
 
+        public async Task<ResponseResult> Master_Reason_insert(CommonViewModel model)
+        {
+            ResponseResult responseResult = new ResponseResult();
+            StringContent content = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json");
+            using (var response = await httpClient.PostAsync("api/common/Master_Reason_insert", content))
+            {
+                string apiResponse = await response.Content.ReadAsStringAsync();
+                responseResult = JsonConvert.DeserializeObject<ResponseResult>(apiResponse);
+            }
+            return responseResult;
+        }
+
         public Task<List<VStatus>> Master_Status_get()
         {
             throw new NotImplementedException();
+        }
+
+        public async Task<ResponseResult> Master_Supplier_delete(CommonViewModel model)
+        {
+            ResponseResult responseResult = new ResponseResult();
+            StringContent content = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json");
+            using (var response = await httpClient.PostAsync("api/common/Master_Supplier_delete", content))
+            {
+                string apiResponse = await response.Content.ReadAsStringAsync();
+                responseResult = JsonConvert.DeserializeObject<ResponseResult>(apiResponse);
+            }
+            return responseResult;
         }
 
         public async Task<List<VSupplier>> Master_Supplier_get()
@@ -73,6 +133,18 @@ namespace Services.Services
                 suppliers = JsonConvert.DeserializeObject<List<VSupplier>>(apiResponse);
             }
             return suppliers;
+        }
+
+        public async Task<ResponseResult> Master_Supplier_insert(CommonViewModel model)
+        {
+            ResponseResult responseResult = new ResponseResult();
+            StringContent content = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json");
+            using (var response = await httpClient.PostAsync("api/common/Master_Supplier_insert", content))
+            {
+                string apiResponse = await response.Content.ReadAsStringAsync();
+                responseResult = JsonConvert.DeserializeObject<ResponseResult>(apiResponse);
+            }
+            return responseResult;
         }
     }
 }

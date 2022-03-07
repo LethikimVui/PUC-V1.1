@@ -64,12 +64,12 @@
         saveAs(data, filename + strDateTime + EXCEL_EXTENSION);
 
     }
-
     function Load() {
-        $("#tbl-content-detail").html("");
+        $("#tbl-detail").html("");
         $("#lbl-detail-title").html("");
         $("#tbl-activity-log").html("");
-        if ($('#txt-customer').val()) {
+        debugger
+        if ($('#txt-customer-search').val()) {
             MainTable.loadData(true);
         }
         else {
@@ -85,29 +85,25 @@
     var MainTable =
     {
         loadData: function (changePageSize) {
+            document.getElementById("detail").setAttribute("style", "display:none");
             var totalRecord = 0;
             $("#loading").show();
-
-            var txtcustId = $("#txt-customer").val();
-            var txtmachineId = $("#txt-machineName").val();// $('#txt-fixtureID option:selected').text().toString();//document.getElementById('txt-fixtureID').value.trim();
-            var txtDescription = document.getElementById('txt-description').value.trim();
-            var txtserialNumber = document.getElementById('txt-serialNumber').value.trim();
-            var txtpartNumber = document.getElementById('txt-partNumber').value.trim();
-
-            var machineId = txtmachineId ? txtmachineId.toString() : null;
-            var description = txtDescription ? txtDescription : null;
+            var txtcustId = $("#txt-customer-search").val();
+            var txtmachineId = $("#txt-machineName-search").val();// $('#txt-fixtureID option:selected').text().toString();//document.getElementById('txt-fixtureID').value.trim();
+            var txtdescription = document.getElementById('txt-description-search').value.trim();
+            var txtserialNumber = document.getElementById('txt-serialNumber-search').value.trim();
+            var selectedmachineId = txtmachineId ? txtmachineId.toString() : null;
+            var description = txtdescription ? txtdescription : null;
             var serialNumber = txtserialNumber ? txtserialNumber : null;
-            var partNumber = txtpartNumber ? txtpartNumber : null;
             var selectedcustId = txtcustId ? txtcustId.toString() : null; //here I get all options and convert to string   
 
             var model = new Object();
             model.PageSize = homeconfig.pageSize
             model.PageIndex = homeconfig.pageIndex - 1;
             model.strCustId = selectedcustId;
-            model.strMachineId = machineId;
+            model.strMachineId = selectedmachineId;
             model.Description = description;
             model.SerialNumber = serialNumber;
-            model.PartNumber = partNumber;
             debugger
             $.ajax({
                 type: 'post',
@@ -124,20 +120,22 @@
                             data: JSON.stringify(model),
                             contentType: "application/json; charset=utf-8",
                             success: function (data) {
-                                $("#tbl-content").html(data);
+                                $("#tbl-main").html(data);
                                 MainTable.paging(totalRecord, function () { }, changePageSize);
                             }
                         });
+
                     }
                     else {
 
-                        $("#tbl-content").html("");
+                        $("#tbl-main").html("");
                         $('#pagination').empty();
                         $("#loading").hide();
                         bootbox.alert('No record found')
                     }
                 }
             });
+
 
         },
         paging: function (totalRow, callback, changePageSize) {
@@ -172,28 +170,10 @@
         },
 
     }
-    //MainTable.loadData();
 
     function Reset() {
         window.location.reload();
     }
 
-    function ShowLog() {
-        var fixId = $(this).attr('data-Id');
-        var fixtureId = $(this).attr('data-fixtureId');
-        var model = new Object();
-        model.FixId = fixId;
-
-        $.ajax({
-            type: 'post',
-            url: '/Activity/Activity_Log_select',
-            data: JSON.stringify(model),
-            contentType: "application/json; charset=utf-8",
-            success: function (data) {
-                $(".modal-title").html('Activity Log for Fixture ID : ' + fixtureId);
-                $("#modal-detail").html(data);
-            }
-        });
-    }
 
 })

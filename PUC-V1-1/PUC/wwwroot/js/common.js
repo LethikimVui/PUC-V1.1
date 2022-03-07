@@ -1,10 +1,10 @@
 ﻿$(document).ready(function () {
-    document.getElementById('txt-customer').addEventListener('change', fncOnchangeCustomer, false)
+    document.getElementById('txt-customer-search').addEventListener('change', fncOnchangeCustomer, false)
     function fncOnchangeCustomer() {
-        var custId = parseInt(document.getElementById("txt-customer").value);
+        var custId = parseInt(document.getElementById("txt-customer-search").value);
 
-        $('#txt-machineName').empty();
-        $('#txt-machineName').append($('<option>', {
+        $('#txt-machineName-search').empty();
+        $('#txt-machineName-search').append($('<option>', {
             value: "",
             text: "--Please Select--"
         }));
@@ -19,15 +19,14 @@
                 var data = response.result;
                 debugger
                 $.each(data, function (index, value) {
-                    $('#txt-machineName').append($('<option>', {
+                    $('#txt-machineName-search').append($('<option>', {
                         value: value.machineId,
                         text: value.machineName
                     }));
                 });
             }
         });
-        $('.cq-dropdown').dropdownCheckboxes();
+        //$('.cq-dropdown').dropdownCheckboxes();
     }
 
-    
 })

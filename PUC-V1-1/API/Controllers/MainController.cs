@@ -23,12 +23,12 @@ namespace API.Controllers
         {
             this.context = context;
         }
-        [HttpPost("Main_Get")]
+        [HttpPost("Maintenance_Get")]
         [Obsolete("Use newMethod instead", false)]
         public async Task<List<VMain>> GetPagination([FromBody] DetailViewModel model)
         {
 
-            var results = await context.Query<VMain>().AsNoTracking().FromSql(SPMain.Main_get, model.PageIndex, model.PageSize, model.strCustId, model.strMachineId, model.SerialNumber, model.PartNumber, model.Description).ToListAsync();
+            var results = await context.Query<VMain>().AsNoTracking().FromSql(SPMain.Maintenance_get, model.PageIndex, model.PageSize, model.strCustId, model.strMachineId, model.SerialNumber, model.PartNumber, model.Description).ToListAsync();
 
             return results;
         }

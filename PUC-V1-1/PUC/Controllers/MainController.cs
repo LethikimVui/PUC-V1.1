@@ -23,18 +23,35 @@ namespace PUC.Controllers
             this.commonService = commonService;
             this.logService = logService;
         }
-        public async Task<IActionResult> Maintenance()
+        public async Task<IActionResult> Get()
         {
             var Ntlogin = User.GetSpecificClaim("Ntlogin");
             var custId = User.GetSpecificClaim("CustId");
-            ViewData["customers"] = await commonService.Customer_get("1099969");
-            ViewData["fixtureId"] = await commonService.Main_MachineName_get(0);
+            ViewData["customers"] = await commonService.Customer_get(Ntlogin);
+            //ViewData["fixtureId"] = await commonService.Main_MachineName_get(0);
 
             return View();
         }
         public async Task<IActionResult> Main_Get([FromBody] DetailViewModel model)
         {
-            var lst = await mainService.Main_Get(model);
+            var lst = await mainService.Maintenance_Get(model);
+            var Ntlogin = User.GetSpecificClaim("Ntlogin");
+            ViewData["customers"] = await commonService.Customer_get(Ntlogin);
+
+            return PartialView(lst);
+        }
+        public async Task<IActionResult> Maintenance()
+        {
+            var Ntlogin = User.GetSpecificClaim("Ntlogin");
+            var custId = User.GetSpecificClaim("CustId");
+            ViewData["customers"] = await commonService.Customer_get(Ntlogin);
+            //ViewData["fixtureId"] = await commonService.Main_MachineName_get(0);
+
+            return View();
+        }
+        public async Task<IActionResult> Maintenance_Get([FromBody] DetailViewModel model)
+        {
+            var lst = await mainService.Maintenance_Get(model);
             return PartialView(lst);
         }
         public async Task<IActionResult> Main_Count([FromBody] DetailViewModel model)

@@ -1,5 +1,10 @@
 ﻿@model List<SharedObjects.ValueObjects.VMain>;
-@using SharedObjects.Extensions;
+
+
+@{
+
+    var customers = ViewData["customers"] as IEnumerable<SharedObjects.ValueObjects.VCustomer>;
+}
 <table class="table table-bordered table-hover table-striped table-responsive">
     <thead>
         <tr class="text-center bold">
@@ -9,15 +14,44 @@
             <th>Fixture Serial Number</th>
             <th>Fixture Part Number</th>
             <th>Description</th>
-            <th>Latest Update Date</th>
+            @*<th>Latest Update Date</th>*@
             @{ if (User.IsInRole("SYSTEM ADMIN") || User.IsInRole("Configuraton Admin"))
                 {
-                    <th>Details</th>
+                    <th>Modification</th>
                 }
             }
         </tr>
     </thead>
     <tbody>
+        <tr class="text-center">
+            <td>New</td>
+            <td>
+                <select class="form-control" id="txt-customer" required>
+                    <option value="">--Please Select--</option>
+                    @foreach (var item in customers.OrderByDescending(c => c.CustId).ToList())
+                    {
+                        <option value=@item.CustId>@item.CustName</option>
+                    }
+                </select>
+            </td>
+            <td>
+                <input id="txt-machine" type="text" class="form-control" tyle="height:30px" />
+            </td>
+            <td>
+                <input id="txt-serialNumber" type="text" class="form-control" tyle="height:30px" />
+
+            </td>
+            <td>
+                <input id="txt-partNumber" type="text" class="form-control" tyle="height:30px" />
+            </td>
+            <td>
+                <input id="txt-description" type="text" class="form-control" tyle="height:30px" />
+            </td>
+
+            <td class="text-center">
+                <a id="btn-add" class="btn default btn-xs purple update" title="Add"> <span class="glyphicon glyphicon-plus"></span></a>
+            </td>
+        </tr>
         @foreach (var item in Model)
         {
             <tr>
@@ -27,12 +61,12 @@
                 <td>@item.SerialNumber</td>
                 <td>@item.PartNumber</td>
                 <td>@item.Description</td>
-                <td>@item.UpdateDate</td>
+                @*<td>@item.UpdateDate</td>*@
                 @{ if (User.IsInRole("SYSTEM ADMIN") || User.IsInRole("Configuraton Admin"))
                     {
                         <td class="text-center">
-                            <a id="btn-detail" class="btn default btn-xs purple" data-machineName="@item.MachineName" data-machineId="@item.MachineId" data-custId="@item.CustId" title="Detail">  <span class="glyphicon glyphicon-list-alt"></span></a>
-                            @*<a id="btn-log" class="btn default btn-xs purple" data-fixtureId="@item.FixtureId" data-Id="@item.Id" data-custId="@item.custId" title="Log" data-toggle="modal" data-target="#myModal">  <span class="glyphicon glyphicon-book"></span></a>*@
+                            <a id="btn-delete" class="btn default btn-xs purple" data-machineName="@item.MachineName" data-machineId="@item.MachineId" data-custId="@item.CustId" title="Delete">  <span class="glyphicon glyphicon-trash"></span></a>
+                            <a id="btn-edit" class="btn default btn-xs purple" data-machineName="@item.MachineName" data-machineId="@item.MachineId" data-custId="@item.CustId" title="Edit" data-toggle="modal" data-target="#myModal">  <span class="glyphicon glyphicon-pencil"></span></a>
 
                         </td>
                     }

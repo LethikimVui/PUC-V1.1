@@ -19,7 +19,7 @@
                     <div class="col-md-2 pull-left">
                         <label class="text-center bold font-green-sharp" for="">Customer</label>
                        
-                        <select class="form-control" id="txt-customer" style="height: 34px !important; color: mediumvioletred">
+                        <select class="form-control" id="txt-customer-search" style="height: 34px !important; color: mediumvioletred">
                             <option value="">--Please Select--</option>
 
                             @foreach (var item in customers.OrderByDescending(c => c.CustId).ToList())
@@ -39,7 +39,7 @@
                     </div>-->
                     <div class="col-md-2 pull-left">
                         <label asp-for="MachineName" class="text- bold font-green-sharp"></label>
-                          <select class="form-control" id="txt-machineName" style="height: 34px !important; color: mediumvioletred">
+                          <select class="form-control" id="txt-machineName-search" style="height: 34px !important; color: mediumvioletred">
 
                             <option value="">--Please Select Customer--</option>
 
@@ -48,30 +48,18 @@
                     <div class="form-group col-md-2">
                         <label class="text-center bold font-green-sharp" for="">Serial Number</label>
                         <label class="control-label"></label>
-                        <input id="txt-serialNumber" class="form-control col-md-3" style="color: mediumvioletred" />
+                        <input id="txt-serialNumber-search" class="form-control col-md-3" style="color: mediumvioletred" />
                     </div>
                     <div class="form-group col-md-2">
                         <label class="text-center bold font-green-sharp" for="">Part Number</label>
                         <label class="control-label"></label>
-                        <input id="txt-partNumber" class="form-control col-md-3" style="color: mediumvioletred" />
+                        <input id="txt-partNumber-search" class="form-control col-md-3" style="color: mediumvioletred" />
                     </div>
                     <div class="form-group col-md-2">
                         <label class="text-center bold font-green-sharp" for="">Fixture Description</label>
                         <label class="control-label"></label>
-                        <input id="txt-description" class="form-control col-md-3" style="color: mediumvioletred" />
-                    </div>
-
-                    <div class="dropdown cq-dropdown" data-name='statuses'>
-                        <select class="selectpicker" data-style="btn-primary" multiple data-max-options="2">
-                            <option>PHP</option>
-                            <option>CSS</option>
-                            <option>HTML</option>
-                            <option>CSS 3</option>
-                            <option>Bootstrap</option>
-                            <option>JavaScript</option>
-                        </select>
-
-                    </div>
+                        <input id="txt-description-search" class="form-control col-md-3" style="color: mediumvioletred" />
+                    </div>                  
 
                     <div class="form-group col-md-12">
                         <a class="btn btn-success" id="btn-search">Search</a>

@@ -23,6 +23,9 @@ namespace API.Models
         public virtual DbSet<Main> Main { get; set; }
         public virtual DbSet<Detail> Detail { get; set; }
         public virtual DbSet<AccessUserRole> AccessUserRole { get; set; }
+        public virtual DbSet<MasterCategory> MasterCategory { get; set; }
+        public virtual DbSet<MasterReason> MasterReason { get; set; }
+        public virtual DbSet<MasterSupplier> MasterSupplier { get; set; }
 
         public virtual DbQuery<VMain> Part { get; set; }
         public virtual DbQuery<VDetail> VDetail { get; set; }
@@ -185,6 +188,119 @@ namespace API.Models
 
                 entity.Property(e => e.UsedTimes).HasColumnName("used_times");
             });
+            modelBuilder.Entity<MasterCategory>(entity =>
+            {
+                entity.HasKey(e => e.CategoryId);
+
+                entity.ToTable("Master_Category");
+
+                entity.Property(e => e.CategoryId).HasColumnName("categoryId");
+
+                entity.Property(e => e.CategoryName)
+                    .HasColumnName("categoryName")
+                    .HasMaxLength(250);
+
+                entity.Property(e => e.CreatedBy)
+                    .HasColumnName("createdBy")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CreationDate)
+                    .HasColumnName("creationDate")
+                    .HasColumnType("datetime");
+
+                entity.Property(e => e.Description)
+                    .HasColumnName("description")
+                    .HasMaxLength(250);
+
+                entity.Property(e => e.IsActive).HasColumnName("isActive");
+
+                entity.Property(e => e.UpdateDate)
+                    .HasColumnName("updateDate")
+                    .HasColumnType("datetime");
+
+                entity.Property(e => e.UpdatedBy)
+                    .HasColumnName("updatedBy")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+            });
+            modelBuilder.Entity<MasterSupplier>(entity =>
+            {
+                entity.HasKey(e => e.SupplierId);
+
+                entity.ToTable("Master_Supplier");
+
+                entity.Property(e => e.SupplierId).HasColumnName("supplierId");
+
+                entity.Property(e => e.CreatedBy)
+                    .HasColumnName("createdBy")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CreationDate)
+                    .HasColumnName("creationDate")
+                    .HasColumnType("datetime");
+
+                entity.Property(e => e.Description)
+                    .HasColumnName("description")
+                    .HasMaxLength(250);
+
+                entity.Property(e => e.IsActive).HasColumnName("isActive");
+
+                entity.Property(e => e.Supplier)
+                    .HasColumnName("supplier")
+                    .HasMaxLength(250);
+
+                entity.Property(e => e.UpdateDate)
+                    .HasColumnName("updateDate")
+                    .HasColumnType("datetime");
+
+                entity.Property(e => e.UpdatedBy)
+                    .HasColumnName("updatedBy")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+            });
+            modelBuilder.Entity<MasterReason>(entity =>
+            {
+                entity.HasKey(e => e.ReasonId);
+
+                entity.ToTable("Master_Reason");
+
+                entity.Property(e => e.ReasonId)
+                    .HasColumnName("reasonId")
+                    .ValueGeneratedOnAdd();
+
+                entity.Property(e => e.CreatedBy)
+                    .HasColumnName("createdBy")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CreationDate)
+                    .HasColumnName("creationDate")
+                    .HasColumnType("datetime");
+
+                entity.Property(e => e.IsActive).HasColumnName("isActive");
+
+                entity.Property(e => e.Reason)
+                    .HasColumnName("reason")
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Remark)
+                    .HasColumnName("remark")
+                    .HasMaxLength(250)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.UpdateDate)
+                    .HasColumnName("updateDate")
+                    .HasColumnType("datetime");
+
+                entity.Property(e => e.UpdatedBy)
+                    .HasColumnName("updatedBy")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+            });
+
+
         }
 
 

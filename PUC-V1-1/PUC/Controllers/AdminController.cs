@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using SharedObjects.Extensions;
 using System.DirectoryServices.AccountManagement;
+using SharedObjects.ViewModels;
 
 namespace PUC.Controllers
 {
@@ -23,15 +24,23 @@ namespace PUC.Controllers
         {
             using (var principalContext = new PrincipalContext(ContextType.Domain))
             {
-                var userPrincipal = UserPrincipal.FindByIdentity(principalContext, samAccountName);
-                if (userPrincipal != null)
+                try
                 {
-                    return userPrincipal.DisplayName;
+                    var userPrincipal = UserPrincipal.FindByIdentity(principalContext, samAccountName);
+                    if (userPrincipal != null)
+                    {
+                        return userPrincipal.DisplayName;
+                    }
+                    else
+                    {
+                        return null;
+                    }
                 }
-                else
+                catch (Exception)
                 {
                     return null;
                 }
+               
             }
         }
         public async Task<IActionResult> Get()
@@ -42,6 +51,25 @@ namespace PUC.Controllers
             ViewData["customers"] = await commonService.Customer_get(NtLogin);
             return View(userRoles);
         }
-
+        public async Task<IActionResult> Access_UserRole_insert([FromBody] UserRoleViewModel model)
+        {
+            var result = await adminService.Access_UserRole_insert(model);
+            return Json(new { results = result });
+        }
+        public async Task<IActionResult> Access_UserRole_update([FromBody] UserRoleViewModel model)
+        {
+            var result = await adminService.Access_UserRole_update(model);
+            return Json(new { results = result });
+        }
+        public async Task<IActionResult> Access_UserRole_delete([FromBody] UserRoleViewModel model)
+        {
+            var result = await adminService.Access_UserRole_delete(model);
+            return Json(new { results = result });
+        }
+        public async Task<IActionResult> Access_UserRole_Get_By_Id(int id)
+        {
+            var result = await adminService.Access_UserRole_Get_By_Id(id);
+            return Json(new { results = result });
+        }
     }
 }

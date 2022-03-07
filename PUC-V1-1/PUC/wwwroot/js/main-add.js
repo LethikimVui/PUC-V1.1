@@ -40,7 +40,7 @@
             })
         }
         else {
-            bootbox.alert("Please make sure Customer / Machine Name / Fixture ID / Part Number /  is provided");
+            bootbox.alert("Please make sure Customer / Machine Name / Fixture ID / Part Number  is provided");
         }
     }
     function Reset() {

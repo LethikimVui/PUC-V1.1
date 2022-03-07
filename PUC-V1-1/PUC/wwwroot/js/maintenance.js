@@ -12,12 +12,11 @@
         $("#lbl-detail-title").html("");
         $("#tbl-activity-log").html("");
         debugger
-        if ($('#txt-customer').val()) {
+        if ($('#txt-customer-search').val()) {
             MainTable.loadData(true);
         }
         else {
             bootbox.alert('Please select customer!')
-            //$("#tbl-main").html('<p class="text-danger bold">No Customer selected </p>');
         }
     }
 
@@ -32,10 +31,10 @@
             document.getElementById("detail").setAttribute("style", "display:none");
             var totalRecord = 0;
             $("#loading").show();
-            var txtcustId = $("#txt-customer").val();
-            var txtmachineId = $("#txt-machineName").val();// $('#txt-fixtureID option:selected').text().toString();//document.getElementById('txt-fixtureID').value.trim();
-            var txtdescription = document.getElementById('txt-description').value.trim();
-            var txtserialNumber = document.getElementById('txt-serialNumber').value.trim();
+            var txtcustId = $("#txt-customer-search").val();
+            var txtmachineId = $("#txt-machineName-search").val();// $('#txt-fixtureID option:selected').text().toString();//document.getElementById('txt-fixtureID').value.trim();
+            var txtdescription = document.getElementById('txt-description-search').value.trim();
+            var txtserialNumber = document.getElementById('txt-serialNumber-search').value.trim();
             var selectedmachineId = txtmachineId ? txtmachineId.toString() : null;
             var description = txtdescription ? txtdescription : null;
             var serialNumber = txtserialNumber ? txtserialNumber : null;
@@ -60,7 +59,7 @@
                     if (totalRecord > 0) {
                         $.ajax({
                             type: 'post',
-                            url: '/Main/Main_Get',
+                            url: '/Main/Maintenance_Get',
                             data: JSON.stringify(model),
                             contentType: "application/json; charset=utf-8",
                             success: function (data) {
@@ -75,8 +74,6 @@
                         $("#tbl-main").html("");
                         $('#pagination').empty();
                         $("#loading").hide();
-                        //$("#tbl-main").html('<p class="text-danger bold"> no record found </p>');
-
                         bootbox.alert('No record found')
                     }
                 }
@@ -126,14 +123,12 @@
         var usedTimes = {};
         var arrdetailId = [];
         var arrlocation = [];
-        //var arrusedTimes = [];
         var elm = document.getElementsByClassName('confirm');
         var len = elm.length;
         for (var i = 0; i < len; i++) {
             if (elm[i].checked) {
                 usedTimes[elm[i].value] = elm[i].attributes[5].value;
                 arrdetailId.push(elm[i].value);
-                // arrusedTimes.push(elm[i].attributes[5].value);
                 arrlocation.push(elm[i].attributes[6].value);
             }
         }
@@ -141,12 +136,6 @@
         var machineId = $(this).attr('data-machineId');
         var custId = $(this).attr('data-custId');
         var machineName = $(this).attr('data-machineName');
-
-        //var dateTo = new Date($("#txt-dateTo").val());
-        //var dateFrom = new Date($("#txt-dateFrom").val());
-        //dateTo = dateTo.getDate() ? dateTo.getFullYear() + '-' + (dateTo.getMonth() + 1) + '-' + dateTo.getDate() + ' ' + dateTo.getHours() + ':' + dateTo.getMinutes() + ':' + dateTo.getSeconds() + '.' + dateTo.getMilliseconds() : null;
-        //dateFrom = dateFrom.getDate() ? dateFrom.getFullYear() + '-' + (dateFrom.getMonth() + 1) + '-' + dateFrom.getDate() + ' ' + dateFrom.getHours() + ':' + dateFrom.getMinutes() + ':' + dateFrom.getSeconds() + '.' + dateFrom.getMilliseconds() : null;
-        debugger
         if (!(arrdetailId.length > 0 && $('#txt-reason').val())) {
             bootbox.alert('Please choose reason or location')
         }

@@ -26,11 +26,11 @@ namespace Services.Services
             return count;
         }
 
-        public async Task<List<VMain>> Main_Get(DetailViewModel model)
+        public async Task<List<VMain>> Maintenance_Get(DetailViewModel model)
         {
             List<VMain> list = new List<VMain>();
             StringContent content = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json");
-            using (var response = await httpClient.PostAsync("api/main/Main_Get", content))
+            using (var response = await httpClient.PostAsync("api/main/Maintenance_Get", content))
             {
                 var apiResponse = await response.Content.ReadAsStringAsync();
                 list = JsonConvert.DeserializeObject<List<VMain>>(apiResponse);
