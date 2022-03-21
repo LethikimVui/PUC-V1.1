@@ -1,0 +1,70 @@
+﻿@model List<SharedObjects.ValueObjects.VDetail>;
+@using SharedObjects.Extensions;
+@{
+    var reasons = ViewData["reasons"] as List<SharedObjects.ValueObjects.VReason>;
+}
+<div class="col-md-2 pull-left">
+    <select class="form-control" id="txt-reason">
+        <option value="">Please select</option>
+        @foreach (var reason in reasons)
+        {
+            <option value="@reason.ReasonId">@reason.Reason</option>
+        }
+    </select>
+</div>
+<div class="col-md-2 pull-left">
+    <a id="btn-refresh" class="btn default btn-xs purple update " title="Refresh"> <span class="glyphicon glyphicon-refresh"></span></a>
+</div>
+<table class="table table-bordered table-hover table-striped table-responsive">
+    <thead>
+        <tr class="text-center bold">
+            <th>No.</th>
+            <th>Customer</th>
+            <th>Fixture ID</th>
+            <th>Part Number</th>
+            <th>Location</th>
+            <th>Category</th>
+            <th>Supplier</th>
+            <th>Used Times</th>
+            <th>Limit</th>
+            <th>Trigger Limit</th>
+            <th>Status</th>
+            <th>Description</th>
+            <th>Latest Update Date</th>
+            <th>Latest Update By</th>
+            @{ if (User.IsInRole("Configuraton Admin") || User.IsInRole("SYSTEM ADMIN"))
+                {
+                    <th>Modification</th>
+                }
+            }
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.rc</td>
+                <td>@item.CustName</td>
+                <td>@item.MachineName</td>
+                <td>@item.PartNumber</td>
+                <td>@item.Location</td>
+                <td>@item.CategoryName</td>
+                <td>@item.Supplier</td>
+                <td>@item.UsedTimes</td>
+                <td>@item.Limit</td>
+                <td>@item.TriggerLimit</td>
+                <td class="level"></td>
+                <td>@item.Description</td>
+                <td>@item.UpdateDate</td>
+                <td>@item.DisplayName</td>
+                @{ if (User.IsInRole("Configuraton Admin") || User.IsInRole("SYSTEM ADMIN"))
+                    {
+                        <td class="text-center">
+                            <input class="confirm" type="checkbox" value="@item.DetailId" data-machineId="@item.MachineId" data-custId="@item.CustId" data-usedTimes="@item.UsedTimes" data-location="@item.Location" />
+                        </td>
+                    }
+                }
+            </tr>
+        }
+    </tbody>
+</table>

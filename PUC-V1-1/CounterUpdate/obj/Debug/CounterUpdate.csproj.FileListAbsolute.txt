@@ -1,0 +1,10 @@
+C:\Users\1099969\OneDrive - Jabil\Desktop\Development_Project\Web\GitHub\PUC-V1.1\PUC-V1-1\CounterUpdate\obj\Debug\CounterUpdate.csprojAssemblyReference.cache
+C:\Users\1099969\OneDrive - Jabil\Desktop\Development_Project\Web\GitHub\PUC-V1.1\PUC-V1-1\CounterUpdate\bin\Debug\CounterUpdate.exe.config
+C:\Users\1099969\OneDrive - Jabil\Desktop\Development_Project\Web\GitHub\PUC-V1.1\PUC-V1-1\CounterUpdate\bin\Debug\CounterUpdate.exe
+C:\Users\1099969\OneDrive - Jabil\Desktop\Development_Project\Web\GitHub\PUC-V1.1\PUC-V1-1\CounterUpdate\bin\Debug\CounterUpdate.pdb
+C:\Users\1099969\OneDrive - Jabil\Desktop\Development_Project\Web\GitHub\PUC-V1.1\PUC-V1-1\CounterUpdate\obj\Debug\Interop.ADODB.dll
+C:\Users\1099969\OneDrive - Jabil\Desktop\Development_Project\Web\GitHub\PUC-V1.1\PUC-V1-1\CounterUpdate\obj\Debug\Interop.JEMS_3.dll
+C:\Users\1099969\OneDrive - Jabil\Desktop\Development_Project\Web\GitHub\PUC-V1.1\PUC-V1-1\CounterUpdate\obj\Debug\CounterUpdate.csproj.ResolveComReference.cache
+C:\Users\1099969\OneDrive - Jabil\Desktop\Development_Project\Web\GitHub\PUC-V1.1\PUC-V1-1\CounterUpdate\obj\Debug\CounterUpdate.csproj.CoreCompileInputs.cache
+C:\Users\1099969\OneDrive - Jabil\Desktop\Development_Project\Web\GitHub\PUC-V1.1\PUC-V1-1\CounterUpdate\obj\Debug\CounterUpdate.exe
+C:\Users\1099969\OneDrive - Jabil\Desktop\Development_Project\Web\GitHub\PUC-V1.1\PUC-V1-1\CounterUpdate\obj\Debug\CounterUpdate.pdb

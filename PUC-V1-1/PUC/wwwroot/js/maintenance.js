@@ -197,7 +197,7 @@
         debugger
         $.ajax({
             type: 'post',
-            url: '/Detail/Get',
+            url: '/Detail/Get_PartialView',
             data: JSON.stringify(model),
             contentType: "application/json; charset=utf-8",
             success: function (data) {

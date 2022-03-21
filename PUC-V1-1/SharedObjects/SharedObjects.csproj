@@ -68,6 +68,7 @@
     <Compile Include="ValueObjects\VUser.cs" />
     <Compile Include="ValueObjects\VUserRole.cs" />
     <Compile Include="ViewModels\CommonViewModel.cs" />
+    <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\LogViewModel.cs" />
     <Compile Include="ViewModels\SearchInputModel.cs" />
     <Compile Include="ViewModels\DetailViewModel.cs" />

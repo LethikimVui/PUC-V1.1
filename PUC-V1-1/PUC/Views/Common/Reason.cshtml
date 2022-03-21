@@ -23,10 +23,10 @@
                                 <tr class="text-center bold">
                                     <td>Supplier</td>
                                     <td>Description</td>
-                                    @*<td>Created By</td>
+                                    <td>Created By</td>
                                     <td>Creation Date</td>
-                                    <td>Updated By</td>
-                                    <td>Update Date</td>*@
+                                    @* <td>Updated By</td>
+                                        <td>Update Date</td>*@
                                     <td style="width:100px">Modification</td>
                                 </tr>
                             </thead>
@@ -34,15 +34,15 @@
 
                                 <tr class="text-center">
                                     <td>
-                                        <input id="txt-supplier" type="text" class="form-control" tyle="height:30px" />
+                                        <input id="txt-reason" type="text" class="form-control" tyle="height:30px" />
                                     </td>
                                     <td>
                                         <input id="txt-description" type="text" class="form-control" tyle="height:30px" />
                                     </td>
+                                    <td></td>
+                                    <td></td>
                                     @*<td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>*@
+                                        <td></td>*@
                                     <td class="text-center">
                                         <a id="btn-add" class="btn default btn-xs purple update" title="Add"> <span class="glyphicon glyphicon-plus"></span></a>
                                     </td>
@@ -54,10 +54,10 @@
 
                                         <td id="">@item.Reason</td>
                                         <td id="">@item.Remark</td>
-                                        @*<td id="">@item.CreatedBy</td>
+                                        <td id="">@item.CreatedBy</td>
                                         <td id="">@item.CreationDate</td>
-                                        <td id="">@item.UpdatedBy</td>
-                                        <td id="">@item.UpdateDate</td>*@
+                                        @* <td id="">@item.UpdatedBy</td>
+                                            <td id="">@item.UpdateDate</td>*@
                                         <td class="text-center">
                                             <a id="btn-delete" class="btn default btn-xs red delete" data-id="@item.ReasonId" data-reason="@item.Reason" title="Delete"> <span class="glyphicon glyphicon-remove"></span></a>
                                         </td>

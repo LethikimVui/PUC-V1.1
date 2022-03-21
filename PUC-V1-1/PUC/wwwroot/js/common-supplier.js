@@ -19,18 +19,21 @@
 
             success: function (response) {
                 var data = response.results
+                bootbox.alert(data.message, function () {
+                    location.reload(true);
+                })
 
-                if (data.statusCode == 200) {
-                    bootbox.alert(data.message, function () {
-                        location.reload(true);
-                    })
-                }
-                else if (data.statusCode == 400) {
-                    bootbox.alert(data.message)
-                }
-                else {
-                    bootbox.alert("Update Error!")
-                }
+                //if (data.statusCode == 200) {
+                //    bootbox.alert(data.message, function () {
+                //        location.reload(true);
+                //    })
+                //}
+                //else if (data.statusCode == 400) {
+                //    bootbox.alert(data.message)
+                //}
+                //else {
+                //    bootbox.alert("Update Error!")
+                //}
             }
         })
     }
@@ -50,7 +53,7 @@
 
                 var data = response.results;
                 if (data.statusCode == 200) {
-                    bootbox.alert(`${category} is deleted`, function () {
+                    bootbox.alert(`${supplier} is deleted`, function () {
                         location.reload(true);
                     })
                 }

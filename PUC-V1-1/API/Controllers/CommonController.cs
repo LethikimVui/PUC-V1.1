@@ -43,7 +43,7 @@ namespace API.Controllers
         {
             try
             {
-                if (!(context.MasterCategory.Where(x => x.CategoryName == model.CategoryName).ToList().Any()))
+                if (!(context.MasterCategory.Where(x => x.CategoryName == model.CategoryName &&  x.IsActive == 1).ToList().Any()))
                 {
 
                     await context.Database.ExecuteSqlCommandAsync(SPCommon.Master_Category_insert, model.CategoryName, model.Description, model.CreatedBy);
@@ -86,7 +86,7 @@ namespace API.Controllers
         {
             try
             {
-                if (!(context.MasterSupplier.Where(x => x.Supplier == model.Supplier).ToList().Any()))
+                if (!(context.MasterSupplier.Where(x => x.Supplier == model.Supplier && x.IsActive == 1).ToList().Any()))
                 {
 
                     await context.Database.ExecuteSqlCommandAsync(SPCommon.Master_Supplier_insert, model.Supplier, model.Description, model.CreatedBy);
@@ -136,7 +136,7 @@ namespace API.Controllers
         {
             try
             {
-                if (!(context.MasterReason.Where(x => x.Reason == model.Reason).ToList().Any()))
+                if (!(context.MasterReason.Where(x => x.Reason == model.Reason && x.IsActive == 1).ToList().Any()))
                 {
 
                     await context.Database.ExecuteSqlCommandAsync(SPCommon.Master_Reason_insert, model.Reason, model.Description, model.CreatedBy);
@@ -158,7 +158,7 @@ namespace API.Controllers
         {
             try
             {
-                await context.Database.ExecuteSqlCommandAsync(SPCommon.Master_Reason_delete, model.Reason, model.UpdatedBy);
+                await context.Database.ExecuteSqlCommandAsync(SPCommon.Master_Reason_delete, model.ReasonId, model.UpdatedBy);
                 return Ok(new ResponseResult(200));
             }
             catch (Exception ex)

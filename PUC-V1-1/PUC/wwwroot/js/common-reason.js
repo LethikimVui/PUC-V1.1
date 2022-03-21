@@ -2,18 +2,17 @@
 
     var user = document.getElementById('userinfo').getAttribute('data-user');
 
-
     $('body').off('click', '#btn-add').on('click', '#btn-add', Add);
     $('body').off('click', '#btn-delete').on('click', '#btn-delete', Delete);
     function Add() {
         var model = new Object();
-        model.CategoryName = $('#txt-category').val();
+        model.Reason = $('#txt-reason').val();
         model.Description = $('#txt-description').val();      
         model.CreatedBy = user;
         debugger
         $.ajax({
             type: 'post',
-            url: '/common/Master_Category_insert',
+            url: '/common/Master_Reason_insert',
             data: JSON.stringify(model),
             contentType: "application/json; charset=utf-8",
 
@@ -35,22 +34,22 @@
         })
     }
     function Delete() {
-        categoryId = $(this).attr('data-id');
+        reasonId = $(this).attr('data-id');
         debugger
-        category = $(this).attr('data-category');
+        reason = $(this).attr('data-reason');
         var model = new Object();
-        model.CategoryId = parseInt(categoryId);
+        model.ReasonId = parseInt(reasonId);
         model.UpdatedBy = user;
         $.ajax({
             type: 'post',
-            url: '/common/Master_Category_delete',
+            url: '/common/Master_Reason_delete',
             data: JSON.stringify(model),
             contentType: "application/json; charset=utf-8",
             success: function (response) {
 
                 var data = response.results;
                 if (data.statusCode == 200) {
-                    bootbox.alert(`${category} is deleted`, function () {
+                    bootbox.alert(`${reason} is deleted`, function () {
                         location.reload(true);
                     })
                 }

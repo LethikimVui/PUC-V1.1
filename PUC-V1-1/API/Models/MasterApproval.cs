@@ -5,13 +5,15 @@ using System.Collections.Generic;
 // If you have enabled NRTs for your project, then un-comment the following line:
 // #nullable disable
 
-namespace API.Models2
+namespace API.Models
 {
-    public partial class MasterSupplier
+    public partial class MasterApproval
     {
-        public int SupplierId { get; set; }
-        public string Supplier { get; set; }
-        public string Description { get; set; }
+        public int UserRoleId { get; set; }
+        public string Ntlogin { get; set; }
+        public byte? RoleId { get; set; }
+        public byte? PlantId { get; set; }
+        public byte? CustId { get; set; }
         public byte? IsActive { get; set; }
         public DateTime? CreationDate { get; set; }
         public string CreatedBy { get; set; }

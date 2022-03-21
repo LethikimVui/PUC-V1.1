@@ -18,7 +18,10 @@ namespace SharedObjects.ViewModels
         public string strMachineId { get; set; }
         public string MachineName { get; set; }
         public string Description { get; set; }
-        public string SerialNumber { get; set; }
+        //public string SerialNumber { get; set; }
+        public int? Limit { get; set; }
+        public byte CustomLimit { get; set; }
+        public int? TriggerLimit { get; set; }
         public string PartNumber { get; set; }
         public string Location { get; set; }
         public string CreatedBy { get; set; }

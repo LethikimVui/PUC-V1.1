@@ -28,5 +28,4 @@
         });
         //$('.cq-dropdown').dropdownCheckboxes();
     }
-
 })

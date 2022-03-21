@@ -2,6 +2,8 @@
     $('body').off('click', '#btn-search').on('click', '#btn-search', Load);
     $('body').off('click', '#btn-reset').on('click', '#btn-reset', Reset);
     $('body').off('click', '#btn-export').on('click', '#btn-export', DownloadAsExcel);
+    $('body').off('click', '#btn-delete').on('click', '#btn-delete', Delete);
+    $('body').off('click', '#btn-add').on('click', '#btn-add', Add);
 
     var user = document.getElementById('userinfo').getAttribute('data-user');
 
@@ -77,7 +79,6 @@
         }
     }
 
-
     var homeconfig = {
         pageSize: 15,
         pageIndex: 1
@@ -85,7 +86,7 @@
     var MainTable =
     {
         loadData: function (changePageSize) {
-            document.getElementById("detail").setAttribute("style", "display:none");
+            //document.getElementById("detail").setAttribute("style", "display:none");
             var totalRecord = 0;
             $("#loading").show();
             var txtcustId = $("#txt-customer-search").val();
@@ -175,5 +176,73 @@
         window.location.reload();
     }
 
+    function Delete() {
+        var machineId = $(this).attr('data-machineId');
+        debugger
 
+        var model = new Object();
+        model.MachineId = parseInt(machineId);
+        model.UpdatedBy = user;
+        $.ajax({
+            type: 'post',
+            url: '/Main/Main_Delete',
+            data: JSON.stringify(model),
+            contentType: "application/json; charset=utf-8",
+            success: function (response) {
+                var statusCode = response.results.statusCode;
+                var message = response.results.message;
+                if (statusCode == 200) {
+                    bootbox.alert(message, function () { MainTable.loadData(true); });
+                }
+                else if (statusCode == 409) {
+                    bootbox.alert(message);
+                }
+                else {
+                    bootbox.alert(message);
+                }
+            }
+        })
+    }
+
+    function Add() {
+        var custId = $("#txt-customer").val();
+        var machine = document.getElementById('txt-machine').value.trim();
+        var serialNumber = document.getElementById('txt-serialNumber').value.trim();
+        var partNumber = document.getElementById('txt-partNumber').value.trim();
+        var description = document.getElementById('txt-description').value.trim();
+        debugger
+        if (custId && machine && (serialNumber || partNumber)) {
+            var model = new Object();
+            model.CustId = parseInt(custId);
+            model.MachineName = machine.toUpperCase();
+            model.SerialNumber = serialNumber.toUpperCase();
+            model.PartNumber = partNumber.toUpperCase();
+            model.Description = description;
+            model.CreatedBy = user;
+            $.ajax({
+                type: 'post',
+                url: '/Main/Main_Add',
+                data: JSON.stringify(model),
+                contentType: "application/json; charset=utf-8",
+                success: function (response) {
+
+                    var statusCode = response.results.statusCode;
+                    var message = response.results.message;
+
+                    if (statusCode == 200) {
+                        bootbox.alert(message, function () { MainTable.loadData(true); });
+                    }
+                    else if (statusCode == 409) {
+                        bootbox.alert(message);
+                    }
+                    else {
+                        bootbox.alert(message);
+                    }
+                }
+            })
+        }
+        else {
+            bootbox.alert("Please make sure Customer / Machine Name / Fixture ID / Part Number  is provided");
+        }
+    }
 })

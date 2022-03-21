@@ -25,7 +25,7 @@ namespace API.Controllers
         }
         [HttpPost("Maintenance_Get")]
         [Obsolete("Use newMethod instead", false)]
-        public async Task<List<VMain>> GetPagination([FromBody] DetailViewModel model)
+        public async Task<List<VMain>> GetPagination([FromBody] MainViewModel model)
         {
 
             var results = await context.Query<VMain>().AsNoTracking().FromSql(SPMain.Maintenance_get, model.PageIndex, model.PageSize, model.strCustId, model.strMachineId, model.SerialNumber, model.PartNumber, model.Description).ToListAsync();
@@ -35,7 +35,7 @@ namespace API.Controllers
 
         [HttpPost("Main_Count")]
         [Obsolete("Use newMethod instead", false)]
-        public async Task<int> CountPagination([FromBody] DetailViewModel model)
+        public async Task<int> CountPagination([FromBody] MainViewModel model)
         {
             var results = await context.Query<VCount>().AsNoTracking().FromSql(SPMain.Main_Count, model.strCustId, model.strMachineId, model.SerialNumber, model.PartNumber, model.Description).ToListAsync();
             int count = (int)results[0].Count;
@@ -43,7 +43,7 @@ namespace API.Controllers
         }
         [HttpPost("Main_Add")]
         [Obsolete("Use newMethod instead", false)]
-        public async Task<IActionResult> Main_Add([FromBody] DetailViewModel model)
+        public async Task<IActionResult> Main_Add([FromBody] MainViewModel model)
         {
             try
             {
@@ -65,7 +65,7 @@ namespace API.Controllers
         }
         [HttpPost("Main_Delete")]
         [Obsolete("Use newMethod instead", false)]
-        public async Task<IActionResult> Main_Delete([FromBody] DetailViewModel model)
+        public async Task<IActionResult> Main_Delete([FromBody] MainViewModel model)
         {
             try
             {

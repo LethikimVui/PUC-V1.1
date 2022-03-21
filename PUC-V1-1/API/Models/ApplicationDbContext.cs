@@ -19,13 +19,14 @@ namespace API.Models
         {
         }
 
-        //Scaffold-DbContext "Data Source=VNHCMC0SQL81;Initial Catalog=PUC;User Id=PUC_User;Password=PUC!@#123;MultipleActiveResultSets=true;" Microsoft.EntityFrameworkCore.SqlServer -Tables "Main" -OutputDir Models2
+        //Scaffold-DbContext "Data Source=VNHCMC0SQL81;Initial Catalog=PUC;User Id=PUC_User;Password=PUC!@#123;MultipleActiveResultSets=true;" Microsoft.EntityFrameworkCore.SqlServer -Tables "master_approval" -OutputDir Models2
         public virtual DbSet<Main> Main { get; set; }
         public virtual DbSet<Detail> Detail { get; set; }
         public virtual DbSet<AccessUserRole> AccessUserRole { get; set; }
         public virtual DbSet<MasterCategory> MasterCategory { get; set; }
         public virtual DbSet<MasterReason> MasterReason { get; set; }
         public virtual DbSet<MasterSupplier> MasterSupplier { get; set; }
+        public virtual DbSet<MasterApproval> MasterApproval { get; set; }
 
         public virtual DbQuery<VMain> Part { get; set; }
         public virtual DbQuery<VDetail> VDetail { get; set; }
@@ -299,7 +300,45 @@ namespace API.Models
                     .HasMaxLength(50)
                     .IsUnicode(false);
             });
+            modelBuilder.Entity<MasterApproval>(entity =>
+            {
+                entity.HasKey(e => e.UserRoleId);
 
+                entity.ToTable("Master_Approval");
+
+                entity.Property(e => e.UserRoleId).HasColumnName("userRoleId");
+
+                entity.Property(e => e.CreatedBy)
+                    .HasColumnName("createdBy")
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CreationDate)
+                    .HasColumnName("creationDate")
+                    .HasColumnType("datetime");
+
+                entity.Property(e => e.CustId).HasColumnName("custID");
+
+                entity.Property(e => e.IsActive).HasColumnName("isActive");
+
+                entity.Property(e => e.Ntlogin)
+                    .HasColumnName("NTLogin")
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.PlantId).HasColumnName("plantID");
+
+                entity.Property(e => e.RoleId).HasColumnName("roleID");
+
+                entity.Property(e => e.UpdateDate)
+                    .HasColumnName("updateDate")
+                    .HasColumnType("datetime");
+
+                entity.Property(e => e.UpdatedBy)
+                    .HasColumnName("updatedBy")
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
+            });
 
         }
 

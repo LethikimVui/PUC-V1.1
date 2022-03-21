@@ -14,7 +14,7 @@ namespace Services.Services
 {
     public class MainService : BaseService, IMainService
     {
-        public async Task<int> Main_Count(DetailViewModel model)
+        public async Task<int> Main_Count(MainViewModel model)
         {
             int count = 0;
             StringContent content = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json");
@@ -26,7 +26,7 @@ namespace Services.Services
             return count;
         }
 
-        public async Task<List<VMain>> Maintenance_Get(DetailViewModel model)
+        public async Task<List<VMain>> Maintenance_Get(MainViewModel model)
         {
             List<VMain> list = new List<VMain>();
             StringContent content = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json");
@@ -38,7 +38,7 @@ namespace Services.Services
             return list;
         }
 
-        public async Task<ResponseResult> Main_Add(DetailViewModel model)
+        public async Task<ResponseResult> Main_Add(MainViewModel model)
         {
             StringContent content = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json");
             ResponseResult responseResult = new ResponseResult();
@@ -50,7 +50,7 @@ namespace Services.Services
             return responseResult;
         }
 
-        public async Task<ResponseResult> Main_Delete(DetailViewModel model)
+        public async Task<ResponseResult> Main_Delete(MainViewModel model)
         {
           StringContent content = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json");
             ResponseResult responseResult = new ResponseResult();

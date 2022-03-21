@@ -1,5 +1,5 @@
 ﻿@model List<SharedObjects.ValueObjects.VMain>;
-@using SharedObjects.Extensions;
+
 <table class="table table-bordered table-hover table-striped table-responsive">
     <thead>
         <tr class="text-center bold">
@@ -9,7 +9,7 @@
             <th>Fixture Serial Number</th>
             <th>Fixture Part Number</th>
             <th>Description</th>
-            @*<th>Latest Update Date</th>*@
+            <th>Latest Update Date</th>
             @{ if (User.IsInRole("SYSTEM ADMIN") || User.IsInRole("Configuraton Admin"))
                 {
                     <th>Modification</th>
@@ -27,13 +27,11 @@
                 <td>@item.SerialNumber</td>
                 <td>@item.PartNumber</td>
                 <td>@item.Description</td>
-                @*<td>@item.UpdateDate</td>*@
+                <td>@item.UpdateDate</td>
                 @{ if (User.IsInRole("SYSTEM ADMIN") || User.IsInRole("Configuraton Admin"))
                     {
                         <td class="text-center">
                             <a id="btn-detail" class="btn default btn-xs purple" data-machineName="@item.MachineName" data-machineId="@item.MachineId" data-custId="@item.CustId" title="Detail">  <span class="glyphicon glyphicon-list-alt"></span></a>
-                            @*<a id="btn-log" class="btn default btn-xs purple" data-fixtureId="@item.FixtureId" data-Id="@item.Id" data-custId="@item.custId" title="Log" data-toggle="modal" data-target="#myModal">  <span class="glyphicon glyphicon-book"></span></a>*@
-
                         </td>
                     }
                 }

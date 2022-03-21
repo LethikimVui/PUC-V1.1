@@ -11,9 +11,9 @@ namespace Services.Interfaces
 {
    public interface IMainService
     {
-        Task<List<VMain>> Maintenance_Get(DetailViewModel model);
-        Task<int> Main_Count(DetailViewModel model);
-        Task<ResponseResult> Main_Add(DetailViewModel model);
-        Task<ResponseResult> Main_Delete(DetailViewModel model);
+        Task<List<VMain>> Maintenance_Get(MainViewModel model);
+        Task<int> Main_Count(MainViewModel model);
+        Task<ResponseResult> Main_Add(MainViewModel model);
+        Task<ResponseResult> Main_Delete(MainViewModel model);
     }
 }

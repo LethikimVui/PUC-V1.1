@@ -95,5 +95,78 @@ namespace API.Controllers
                 return BadRequest(new ResponseResult(400, ex.Message));
             }
         }
+
+        [HttpGet("Master_Approval_get")]
+        [Obsolete()]
+        public async Task<List<VUserRole>> Master_Approval_get()
+        {
+            var results = await context.Query<VUserRole>().AsNoTracking().FromSql(SPAdmin.Master_Approval_get).ToListAsync();
+            return results;
+        }
+        [HttpGet("Master_Approval_Get_By_Id/{id}")]
+        [Obsolete]
+        public async Task<List<VUserRole>> Master_Approval_Get_By_Id(int id)
+        {
+            var results = await context.Query<VUserRole>().AsNoTracking().FromSql(SPAdmin.Master_Approval_Get_By_Id, id).ToListAsync();
+            return results;
+        }
+        //[HttpGet("Master_Approval_Get_By_actionId/{id}")]
+        //[Obsolete]
+        //public async Task<List<VUserRole>> Master_Approval_Get_By_actionId(int id)
+        //{
+        //    var results = await context.Query<VUserRole>().AsNoTracking().FromSql(SPAdmin.Master_Approval_Get_By_actionId, id).ToListAsync();
+        //    return results;
+        //}
+        [HttpPost("Master_Approval_insert")]
+        [Obsolete]
+        public async Task<IActionResult> Master_Approval_insert(UserRoleViewModel model)
+        {
+            try
+            {
+                if (!context.MasterApproval.Where(x => (x.Ntlogin == model.Ntlogin) && (x.CustId == model.CustId) && (x.IsActive == 1)).ToList().Any())
+                {
+                    await context.Database.ExecuteSqlCommandAsync(SPAdmin.Master_Approval_insert, model.Ntlogin, model.RoleId, model.PlantId, model.CustId, model.CreatedBy);
+                    return Ok(new ResponseResult(200, "User Added Successfully"));
+                }
+                else
+                {
+                    return Conflict(new ResponseResult(400, "User already existing"));
+                }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new ResponseResult(400, ex.Message));
+            }
+        }
+        [HttpPost("Master_Approval_update")]
+        [Obsolete]
+        public async Task<IActionResult> Master_Approval_update(UserRoleViewModel model)
+        {
+            try
+            {
+                await context.Database.ExecuteSqlCommandAsync(SPAdmin.Master_Approval_update, model.UserRoleId, model.PlantId, model.CustId, model.RoleId, model.UpdatedBy);
+                return Ok(new ResponseResult(200, "User Updated Successfully"));
+            }
+
+            catch (Exception ex)
+            {
+                return BadRequest(new ResponseResult(400, ex.Message));
+            }
+        }
+        [HttpPost("Master_Approval_delete")]
+        [Obsolete]
+        public async Task<IActionResult> Master_Approval_delete(UserRoleViewModel model)
+        {
+            try
+            {
+                await context.Database.ExecuteSqlCommandAsync(SPAdmin.Master_Approval_delete, model.UserRoleId, model.UpdatedBy);
+                return Ok(new ResponseResult(200));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new ResponseResult(400, ex.Message));
+            }
+
+        }
     }
 }

@@ -25,8 +25,8 @@
                                     <td>Description</td>
                                     <td>Created By</td>
                                     <td>Creation Date</td>
-                                    <td>Updated By</td>
-                                    <td>Update Date</td>
+                                    @*<td>Updated By</td>
+                                    <td>Update Date</td>*@
                                     <td style="width:100px">Modification</td>
                                 </tr>
                             </thead>
@@ -41,8 +41,8 @@
                                     </td>
                                     <td></td>
                                     <td></td>
-                                    <td></td>
-                                    <td></td>
+                                    @*<td></td>
+                                    <td></td>*@
                                     <td class="text-center">
                                         <a id="btn-add" class="btn default btn-xs purple update" title="Add"> <span class="glyphicon glyphicon-plus"></span></a>
                                     </td>
@@ -56,10 +56,10 @@
                                         <td id="">@item.Description</td>
                                         <td id="">@item.CreatedBy</td>
                                         <td id="">@item.CreationDate</td>
-                                        <td id="">@item.UpdatedBy</td>
-                                        <td id="">@item.UpdateDate</td>
+                                        @*<td id="">@item.UpdatedBy</td>
+                                        <td id="">@item.UpdateDate</td>*@
                                         <td class="text-center">
-                                            <a id="btn-delete" class="btn default btn-xs red delete" data-id="@item.SupplierId" data-category="@item.Supplier" title="Delete"> <span class="glyphicon glyphicon-remove"></span></a>
+                                            <a id="btn-delete" class="btn default btn-xs red delete" data-id="@item.SupplierId" data-supplier="@item.Supplier" title="Delete"> <span class="glyphicon glyphicon-remove"></span></a>
                                         </td>
                                     </tr>
                                 }

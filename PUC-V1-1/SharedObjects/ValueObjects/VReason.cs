@@ -11,5 +11,7 @@ namespace SharedObjects.ValueObjects
         public byte ReasonId { get; set; }
         public string Reason { get; set; }
         public string Remark { get; set; }
+        public DateTime CreationDate { get; set; }
+        public string CreatedBy { get; set; }
     }
 }

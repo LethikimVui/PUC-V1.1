@@ -71,5 +71,36 @@ namespace PUC.Controllers
             var result = await adminService.Access_UserRole_Get_By_Id(id);
             return Json(new { results = result });
         }
+
+        #region Approval Configuration
+        public async Task<IActionResult> Approval()
+        {
+            var NtLogin = User.GetSpecificClaim("Ntlogin");
+            var approval = await adminService.Master_Approval_get();
+            ViewData["roles"] = await adminService.Access_Role_get();
+            ViewData["customers"] = await commonService.Customer_get(NtLogin);
+            return View(approval);
+        }
+        public async Task<IActionResult> Master_Approval_Get_By_Id(int id)
+        {
+            var results = await adminService.Master_Approval_Get_By_Id(id);
+            return Json(new { results = results });
+        }
+        public async Task<IActionResult> Master_Approval_insert([FromBody] UserRoleViewModel model)
+        {
+            var result = await adminService.Master_Approval_insert(model);
+            return Json(new { results = result });
+        }
+        public async Task<IActionResult> Master_Approval_update([FromBody] UserRoleViewModel model)
+        {
+            var result = await adminService.Master_Approval_update(model);
+            return Json(new { results = result });
+        }
+        public async Task<IActionResult> Master_Approval_delete([FromBody] UserRoleViewModel model)
+        {
+            var result = await adminService.Master_Approval_delete(model);
+            return Json(new { results = result });
+        }
+        #endregion
     }
 }
