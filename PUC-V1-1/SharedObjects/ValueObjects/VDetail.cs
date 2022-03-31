@@ -8,7 +8,6 @@ namespace SharedObjects.ValueObjects
 {
     public class VDetail
     {
-
         public int DetailId { get; set; }
         public Byte? CustId { get; set; }
         public string CustName { get; set; }
@@ -24,6 +23,7 @@ namespace SharedObjects.ValueObjects
         public int? TriggerLimit { get; set; }
         public int? Limit { get; set; }
         public int? Level { get; set; }
+        public int? StatusId { get; set; }
         public string Description { get; set; }
         public string Status { get; set; }
         public DateTime? UpdateDate { get; set; }

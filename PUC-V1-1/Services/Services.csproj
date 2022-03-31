@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Interfaces\IRequestService.cs" />
     <Compile Include="Interfaces\IAdminService.cs" />
     <Compile Include="Interfaces\IAccountService.cs" />
     <Compile Include="Interfaces\ICommonService.cs" />
@@ -51,6 +52,7 @@
     <Compile Include="Interfaces\IDetailService.cs" />
     <Compile Include="Interfaces\IMainService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\RequestService.cs" />
     <Compile Include="Services\AdminService.cs" />
     <Compile Include="Services\CommonService.cs" />
     <Compile Include="Services\BaseService.cs" />

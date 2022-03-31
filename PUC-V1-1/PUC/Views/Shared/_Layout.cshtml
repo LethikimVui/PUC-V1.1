@@ -1,4 +1,6 @@
 ﻿@using SharedObjects.Extensions;
+@using Microsoft.Extensions.Configuration;
+@inject IConfiguration Configuration
 <!DOCTYPE html>
 <html lang="en">
 
@@ -64,24 +66,24 @@
 
         <div class="page-header-menu">
             <div class="container">
-
                 <div class="hor-menu ">
-
                     <ul class="nav navbar-nav">
                         <li>
-                            <a target="_blank" href="https://app.powerbi.com/links/JWLewVFMW-?ctid=bc876b21-f134-4c12-a265-8ed26b7f0f3b&pbi_source=linkShare"><i class="icon-home"></i><span>PUC Dashboard</span> </a>
+                            <a target="_blank" href="@Configuration["DashBoadLink"]"><i class="icon-home"></i><span>PUC Dashboard</span> </a>
                         </li>
-
                         @if (!User.IsInRole("None") && !User.IsInRole("User"))
                         {
                             <li>
                                 <a asp-action="Maintenance" asp-controller="Main">
                                     Maintenance
                                 </a>
-
                             </li>
                         }
-                      
+                        <li>
+                            <a asp-action="Get" asp-controller="Request">
+                                Request
+                            </a>
+                        </li>
                         @if (User.Identity.IsAuthenticated && (User.IsInRole("SYSTEM ADMIN") || User.IsInRole("Configuraton Admin")))
                         {
                             <li class="menu-dropdown mega-menu-dropdown ">
@@ -148,10 +150,10 @@
                                                     <ul class="mega-menu-submenu">
 
                                                         @*<li>
-                                                            <a asp-action="MassUpload" asp-controller="Detail">
-                                                                <i class="icon-pin"></i> Detail Part Mass Upload
-                                                            </a>
-                                                        </li>*@
+                                            <a asp-action="MassUpload" asp-controller="Detail">
+                                                <i class="icon-pin"></i> Detail Part Mass Upload
+                                            </a>
+                                        </li>*@
                                                         <li>
                                                             <a asp-action="Get" asp-controller="Admin">
                                                                 <i class="icon-user"></i> User Role
@@ -175,7 +177,7 @@
                         <li class="dropdown dropdown-user dropdown-dark" style="position: absolute; right: 0px;top:0px">
                             @if (User.Identity.IsAuthenticated)
                             {
-                                <a id="userinfo" href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true" data-user="@User.GetSpecificClaim("Ntlogin")" data-display-name="@User.GetSpecificClaim("UserName")" data-email="@User.GetSpecificClaim("Email")">
+                                <a id="userinfo" href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true" data-user="@User.GetSpecificClaim("Ntlogin")" data-display-name="@User.GetSpecificClaim("UserName")" data-email="@User.GetSpecificClaim("UserEmail")">
                                     <img alt="" class="img-circle" src="~/assets/admin/layout3/img/logout.png" style="width: 25px">
                                     Hi @User.GetSpecificClaim("UserName") (@User.GetSpecificClaim("Ntlogin"))
                                 </a>

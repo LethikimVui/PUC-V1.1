@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.OleDb;
 using System.Data.SqlClient;
@@ -14,57 +16,71 @@ namespace CounterUpdate
     {
         static private ADODB.Recordset rs = new ADODB.Recordset();
         //private ADODB.Connection cnn = new ADODB.Connection(); 
-        static private string connectionString = "Data Source=VNHCMC0SQL81;Database=PUC;User Id=PUC_USER;Password=PUC!@#123;MultipleActiveResultSets=true;";
+        //static private string ConnectionString = "Data Source=VNHCMC0SQL81;Database=PUC;User Id=PUC_USER;Password=PUC!@#123;MultipleActiveResultSets=true;";
+        //static private string connectionString = ConfigurationManager.AppSettings["ConnectionString"];
+        static private string connectionString = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
+        static private List<string> emails = ConfigurationManager.AppSettings["email"].Split(';').ToList();
+        static private string usp_Update = ConfigurationManager.AppSettings["usp_Update"];
+        static private string Database_Server = ConfigurationManager.AppSettings["Database_Server"];
+        static private string Database_Name = ConfigurationManager.AppSettings["Database_Name"];
+
         static List<string> notRegisteredMachine = new List<string>();
         static List<string> RegisteredMachine_no_detail = new List<string>();
-        static List<string> list = new List<string>()
-            {
-                "BFT",
-                "RFT",
-                "CONFIG",
-                "DTT",
-                "CST",
-                "APTC"
-            };
+        //static List<string> list = new List<string>()
+        //    {
+        //        "BFT",
+        //        "RFT",
+        //        "CONFIG",
+        //        "DTT",
+        //        "CST",
+        //        "APTC"
+        //    };
+        static List<string> TestRouteStep = ConfigurationManager.AppSettings["TestRouteStep"].Split(',').ToList();
+        static List<string> Workcell = ConfigurationManager.AppSettings["Workcell"].Split(',').ToList();
         static void Main(string[] args)
         {
+            var section = (Hashtable)ConfigurationManager.GetSection("Config");
+            Dictionary<string, string> dictionary = section.Cast<DictionaryEntry>().ToDictionary(d => (string)d.Key, d => (string)d.Value);
+
             OleDbDataAdapter dataAdapter = new OleDbDataAdapter();
             var endTime = DateTime.Now;
             var startTime = endTime.AddHours(-0.5);
             DataTable dt1 = new DataTable();
-
             JEMS_3.QM_TestData qmt = new JEMS_3.QM_TestData();
-            rs = qmt.GetTestsForDateRange("VNHCMM0MSSQLV1A", "JEMS", 6511, startTime.ToString(), endTime.ToString());
+            rs = qmt.GetTestsForDateRange(Database_Server, Database_Name, 6511, startTime.ToString(), endTime.ToString());
             dataAdapter.Fill(dt1, rs);
             for (int i = 0; i < dt1.Rows.Count; i++)
             {
-                //Console.WriteLine(dt1.Rows[i]["SerialNumber"] + "|" + dt1.Rows[i]["TestEquipment"] + "|" + dt1.Rows[i]["TestRoute"] + "|" + dt1.Rows[i]["TestRouteStep"] + "|" + dt1.Rows[i]["TestStartDateTime"] + "|" + dt1.Rows[i]["TestEndDateTime"]);
+                //Console.WriteLine(dt1.Rows[i]["SerialNumber"] + "|" + dt1.Rows[i]["TestEquipment"] + "|" + dt1.Rows[i]["TestRoute"] + "|" + dt1.Rows[i]["TestRouteStep"] + "|" + dt1.Rows[i]["TestStartDateTime"] + "|" + dt1.Rows[i]["TestEndDateTime"] + "|" + dt1.Rows[i]["Customer_ID"] + "|" + dt1.Rows[i]["Customer"]);
                 var testStep = dt1.Rows[i]["TestRouteStep"].ToString().Split(' ').LastOrDefault();
-                if (list.Contains(testStep))
+                var customer_ID = dt1.Rows[i]["Customer_ID"].ToString(); 
+                string testEquipment = dt1.Rows[i]["TestEquipment"].ToString().Split(' ').LastOrDefault();
+
+                //if (TestRouteStep.Contains(testStep) || Workcell.Contains(customer_ID))
+                if ((dictionary.ContainsKey(testStep) && dictionary[testStep] == customer_ID) || (dictionary.ContainsKey(testEquipment) && dictionary[testEquipment] == customer_ID))
                 {
                     using (SqlConnection conn = new SqlConnection(connectionString))
                     {
                         conn.Open();
-                        SqlCommand command = new SqlCommand("usp_Main_Usedtimes_Update", conn);
-                        string TestEquipment = dt1.Rows[i]["TestEquipment"].ToString().Split(' ').LastOrDefault();
+                        SqlCommand command = new SqlCommand(usp_Update, conn);
                         command.CommandType = CommandType.StoredProcedure;
-                        command.Parameters.AddWithValue("@in_machineName", TestEquipment);
+                        command.Parameters.AddWithValue("@in_machineName", testEquipment);
                         command.Parameters.AddWithValue("@out_result", 0).Direction = ParameterDirection.Output;
 
                         command.ExecuteNonQuery();
                         int out_result = Convert.ToInt32(command.Parameters["@out_result"].Value);
                         if (out_result == 2)
                         {
-                            if (!notRegisteredMachine.Contains(TestEquipment))
+                            if (!notRegisteredMachine.Contains(testEquipment))
                             {
-                                notRegisteredMachine.Add(TestEquipment);
+                                notRegisteredMachine.Add(testEquipment);
                             }
                         }
                         else if (out_result == 3)
                         {
-                            if (!RegisteredMachine_no_detail.Contains(TestEquipment))
+                            if (!RegisteredMachine_no_detail.Contains(testEquipment))
                             {
-                                RegisteredMachine_no_detail.Add(TestEquipment);
+                                RegisteredMachine_no_detail.Add(testEquipment);
                             }
                         }
                         conn.Close();
@@ -91,7 +107,11 @@ namespace CounterUpdate
             }
             emailContent += "</table>";
             message.From = new MailAddress("PUC@Jabil.com");
-            message.To.Add(new MailAddress("vui_le@Jabil.com"));
+            foreach (var email in emails)
+            {
+                message.To.Add(new MailAddress(email));
+
+            }
             message.Subject = "PUC";
             message.Body = emailContent;
             message.IsBodyHtml = true;

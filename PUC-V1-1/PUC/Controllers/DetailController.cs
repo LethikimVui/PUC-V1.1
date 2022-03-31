@@ -23,7 +23,6 @@ namespace PUC.Controllers
         }
         public async Task<IActionResult> Get()
         {
-            //var results = await detailService.Get(model);
             var Ntlogin = User.GetSpecificClaim("Ntlogin");
             ViewData["customers"] = await commonService.Customer_get(Ntlogin);
             var categories = await commonService.Master_Category_get();

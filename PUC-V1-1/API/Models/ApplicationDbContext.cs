@@ -19,7 +19,7 @@ namespace API.Models
         {
         }
 
-        //Scaffold-DbContext "Data Source=VNHCMC0SQL81;Initial Catalog=PUC;User Id=PUC_User;Password=PUC!@#123;MultipleActiveResultSets=true;" Microsoft.EntityFrameworkCore.SqlServer -Tables "master_approval" -OutputDir Models2
+        //Scaffold-DbContext "Data Source=VNHCMC0SQL81;Initial Catalog=PUC;User Id=PUC_User;Password=PUC!@#123;MultipleActiveResultSets=true;" Microsoft.EntityFrameworkCore.SqlServer -Tables "Request" -OutputDir Models2
         public virtual DbSet<Main> Main { get; set; }
         public virtual DbSet<Detail> Detail { get; set; }
         public virtual DbSet<AccessUserRole> AccessUserRole { get; set; }
@@ -27,6 +27,7 @@ namespace API.Models
         public virtual DbSet<MasterReason> MasterReason { get; set; }
         public virtual DbSet<MasterSupplier> MasterSupplier { get; set; }
         public virtual DbSet<MasterApproval> MasterApproval { get; set; }
+        public virtual DbSet<Request> Request { get; set; }
 
         public virtual DbQuery<VMain> Part { get; set; }
         public virtual DbQuery<VDetail> VDetail { get; set; }
@@ -41,6 +42,9 @@ namespace API.Models
         public virtual DbQuery<VUser> VUser { get; set; }
         public virtual DbQuery<VUserRole> VUserRole { get; set; }
         public virtual DbQuery<VLog> VLog { get; set; }
+        public virtual DbQuery<VRequest> VRequest { get; set; }
+        public virtual DbQuery<VRequestDetail> VRequestDetail { get; set; }
+        public virtual DbQuery<VTicket> VTicket { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -339,7 +343,62 @@ namespace API.Models
                     .HasMaxLength(30)
                     .IsUnicode(false);
             });
+            modelBuilder.Entity<Request>(entity =>
+            {
+                entity.HasKey(e => e.ReqId);
 
+                entity.Property(e => e.ReqId).HasColumnName("reqId");
+
+                entity.Property(e => e.CategoryId).HasColumnName("categoryId");
+
+                entity.Property(e => e.CreatedBy)
+                    .HasColumnName("createdBy")
+                    .HasMaxLength(50);
+
+                entity.Property(e => e.CreationDate)
+                    .HasColumnName("creationDate")
+                    .HasColumnType("datetime");
+
+                entity.Property(e => e.Description)
+                    .HasColumnName("description")
+                    .HasMaxLength(250)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.DetailId).HasColumnName("detailId");
+
+                entity.Property(e => e.FileName)
+                    .HasColumnName("fileName")
+                    .IsUnicode(false);
+
+                entity.Property(e => e.IsActive).HasColumnName("isActive");
+
+                entity.Property(e => e.Limit).HasColumnName("limit");
+
+                entity.Property(e => e.Location)
+                    .HasColumnName("location")
+                    .HasMaxLength(50);
+
+                entity.Property(e => e.PartNumber)
+                    .HasColumnName("partNumber")
+                    .HasMaxLength(50);
+
+                entity.Property(e => e.ReqNumber)
+                    .HasColumnName("reqNumber")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.SupplierId).HasColumnName("supplierId");
+
+                entity.Property(e => e.TriggerLimit).HasColumnName("triggerLimit");
+
+                entity.Property(e => e.UpdateDate)
+                    .HasColumnName("updateDate")
+                    .HasColumnType("datetime");
+
+                entity.Property(e => e.UpdatedBy)
+                    .HasColumnName("updatedBy")
+                    .HasMaxLength(50);
+            });
         }
 
 

@@ -1,0 +1,29 @@
+﻿@model List<SharedObjects.ValueObjects.VRequestDetail>;
+
+<table class="table table-bordered table-hover table-striped table-responsive">
+    <thead>
+        <tr class="text-center bold">
+            <td></td>
+            <td>Supplier</td>
+            <td>Category</td>
+            <td>Limit</td>
+            <td>Location</td>
+            <td>Part Number</td>
+            <td>Trigger Limit</td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Description</td>
+                <td id="Supplier-@item.Description">@item.Supplier</td>
+                <td id="CategoryName-@item.Description">@item.CategoryName</td>
+                <td id="Limit-@item.Description">@item.Limit</td>
+                <td id="Location-@item.Description">@item.Location</td>
+                <td id="PartNumber-@item.Description">@item.PartNumber</td>
+                <td id="TriggerLimit-@item.Description">@item.TriggerLimit</td>
+            </tr>
+        }
+    </tbody>
+</table>

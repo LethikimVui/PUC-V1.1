@@ -49,11 +49,14 @@
     <Compile Include="Extensions\IdentityExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StoredProcedure\SPAccount.cs" />
+    <Compile Include="StoredProcedure\SPRequest.cs" />
     <Compile Include="StoredProcedure\SPLog.cs" />
     <Compile Include="StoredProcedure\SPDetail.cs" />
     <Compile Include="StoredProcedure\SPMain.cs" />
     <Compile Include="StoredProcedure\SPAdmin.cs" />
     <Compile Include="StoredProcedure\SPCommon.cs" />
+    <Compile Include="ValueObjects\VRequestDetail.cs" />
+    <Compile Include="ValueObjects\VTicket.cs" />
     <Compile Include="ValueObjects\VDetail.cs" />
     <Compile Include="ValueObjects\VMachineName.cs" />
     <Compile Include="ValueObjects\VStatus.cs" />
@@ -65,8 +68,10 @@
     <Compile Include="ValueObjects\VMain.cs" />
     <Compile Include="ValueObjects\VRole.cs" />
     <Compile Include="ValueObjects\VLog.cs" />
+    <Compile Include="ValueObjects\VRequest.cs" />
     <Compile Include="ValueObjects\VUser.cs" />
     <Compile Include="ValueObjects\VUserRole.cs" />
+    <Compile Include="ViewModels\RequestViewModel.cs" />
     <Compile Include="ViewModels\CommonViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\LogViewModel.cs" />

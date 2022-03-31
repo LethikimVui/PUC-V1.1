@@ -145,9 +145,18 @@
                     <input type="text" class="form-control" id="txt-description" />
                 </div>
                 <div class="form-group">
-                    <input id="upload" type=file multiple name="files" onclick="this.value=''" accept=".xlsx">
+                    <input id="upload" type=file multiple name="files[]" accept=".xlsx">
+                </div>
+                <div id="fileList">
                 </div>
 
+                @*<div class="form-group custom-file">
+                    <input id="file2" type="file" class="custom-file-input" name="files2" multiple onchange="javascript:updateList()" />
+                    <label class="custom-file-label" for="file">
+                        Choose Attachment
+                    </label>
+                </div>
+                <ul id="fileList2" class="file-list"></ul>*@
 
             </form>
             <!-- Modal footer -->
@@ -185,7 +194,7 @@
             debugger
             $.ajax({
                 type: 'post',
-                url: '/common/Main_MachineName_get',
+                url: '/puc/common/Main_MachineName_get',
                 dataType: 'json',
                 data: { custId: custId },
                 success: function (response) {
