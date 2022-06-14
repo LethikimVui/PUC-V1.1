@@ -32,6 +32,13 @@ namespace API.Controllers
             var result = await context.Query<VRequest>().AsNoTracking().FromSql(SPRequest.Request_Get, model.StatusId).ToListAsync();
             return result;
         }
+        [HttpPost("Request_Get_Approval")]
+        [Obsolete("Use newMethod instead", false)]
+        public async Task<List<VApproval>> Request_Get_Approval([FromBody] RequestViewModel model)
+        {
+            var result = await context.Query<VApproval>().AsNoTracking().FromSql(SPRequest.Request_Get_Approval, model.ReqId).ToListAsync();
+            return result;
+        }
 
         [HttpPost("Request_insert")]
         [Obsolete]
@@ -41,7 +48,7 @@ namespace API.Controllers
             {
                 var results = await context.Query<VTicket>().AsNoTracking().FromSql(SPRequest.Request_insert, model.DetailId, model.CategoryId, model.SupplierId, model.Location, model.PartNumber, model.Limit, model.TriggerLimit, model.CreatedBy, model.Description, model.FileName).ToListAsync();
                 var ticket = (string)results[0].Ticket;
-                return Ok(new ResponseResult(200, "Request " + ticket + " is submited successfully"));
+                return Ok(new ResponseResult(200, ticket));
             }
             catch (Exception ex)
             {

@@ -53,6 +53,19 @@ namespace Services.Services
             return results;
         }
 
+        public async Task<List<VApproval>> Request_Get_Approval(RequestViewModel model)
+        {
+            List<VApproval> results = new List<VApproval>();
+            StringContent content = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json");
+
+            using (var response = await httpClient.PostAsync("api/Request/Request_Get_Approval", content))
+            {
+                string apiResponse = await response.Content.ReadAsStringAsync();
+                results = JsonConvert.DeserializeObject<List<VApproval>>(apiResponse);
+            }
+            return results;
+        }
+
         public async Task<ResponseResult> Request_insert(RequestViewModel model)
         {
             ResponseResult responseResult = new ResponseResult();

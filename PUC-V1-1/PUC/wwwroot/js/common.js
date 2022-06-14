@@ -26,6 +26,5 @@
                 });
             }
         });
-        //$('.cq-dropdown').dropdownCheckboxes();
     }
 })

@@ -7,6 +7,7 @@
     $('body').off('click', '#btn-submit').on('click', '#btn-submit', Submit)
 
     var user = document.getElementById('userinfo').getAttribute('data-user');
+    var email = document.getElementById('userinfo').getAttribute('data-email');
 
 
     function Load() {
@@ -148,7 +149,13 @@
                 contentType: 'application/json;charset=utf-8',
                 success: function (response) {
                     var results = response.results
-                    bootbox.alert(results.message, function () { ReLoad() });
+                    if (results.statusCode == 200) {
+                        bootbox.alert(results.message, function () { ReLoad() });
+
+                    }
+                    else
+                        bootbox.alert(results.message);
+
                 }
             })
         }
@@ -264,6 +271,7 @@
         model.Limit = parseInt($('#txt-Limit').val());
         model.TriggerLimit = parseInt($('#txt-TriggerLimit').val());
         model.CreatedBy = user;
+        model.CreatedEmail = email;
         model.Description = $('#txt-description').val();
         model.FileName = fileName ? fileName : null;
 
@@ -275,7 +283,7 @@
             contentType: 'application/json;charset=utf-8',
             success: function (response) {
                 var results = response.results
-                bootbox.alert(results.message, function () { $('#myModal').modal('hide'); ReLoad() });
+                bootbox.alert("Request " + results.message + " is submited successfully" , function () { $('#myModal').modal('hide'); ReLoad() });
             }
         })
 

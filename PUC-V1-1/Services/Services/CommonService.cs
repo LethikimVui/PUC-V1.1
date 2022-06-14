@@ -107,9 +107,15 @@ namespace Services.Services
             return responseResult;
         }
 
-        public Task<List<VStatus>> Master_Status_get()
+        public async Task<List<VStatus>> Master_Status_get()
         {
-            throw new NotImplementedException();
+            List<VStatus> reasons = new List<VStatus>();
+            using (var response = await httpClient.GetAsync("api/common/Master_Status_get"))
+            {
+                var apiResponse = await response.Content.ReadAsStringAsync();
+                reasons = JsonConvert.DeserializeObject<List<VStatus>>(apiResponse);
+            }
+            return reasons;
         }
 
         public async Task<ResponseResult> Master_Supplier_delete(CommonViewModel model)

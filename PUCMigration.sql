@@ -108,3 +108,26 @@ SELECT TOP (1000) [detailId]
   where isActive = 1
   SET IDENTITY_INSERT [dbo].[Detail] OFF
 -- END migrate the Detail table
+
+
+
+
+--SET IDENTITY_INSERT [dbo].[Master_Assembly_Configuration] ON 
+insert into [dbo].[Master_Assembly_Configuration]  (
+      [machineId]
+      ,[assemblyNo]
+      ,[isActive]
+      ,[createdBy]
+      ,[creationDate]
+      )
+select [fixId]
+      ,[assemblyNo]
+      ,[isActive]
+      ,[createdBy]
+      ,[creationDate] from [dbo].[CPCC_Master_Matrix] where isActive = 1
+
+--SET IDENTITY_INSERT [dbo].[Master_Assembly_Configuration] OFF
+
+truncate table [Master_Assembly_Configuration]
+
+update [CPCC_Master_Matrix] set isActive = 0 where assemblyNo like '%test%' or assemblyNo is null

@@ -45,6 +45,8 @@ namespace API.Models
         public virtual DbQuery<VRequest> VRequest { get; set; }
         public virtual DbQuery<VRequestDetail> VRequestDetail { get; set; }
         public virtual DbQuery<VTicket> VTicket { get; set; }
+        public virtual DbQuery<VApproval> VApproval { get; set; }
+        public virtual DbQuery<VAssembly> VAssembly { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

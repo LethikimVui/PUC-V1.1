@@ -12,6 +12,7 @@ namespace Services.Interfaces
    public interface IRequestService
     {
         Task<List<VRequest>> Request_Get(RequestViewModel model);
+        Task<List<VApproval>> Request_Get_Approval(RequestViewModel model);
         Task<List<VRequestDetail>> Request_Detail(RequestViewModel model);
         Task<ResponseResult> Request_insert(RequestViewModel model);
         Task<ResponseResult> Request_Reject(RequestViewModel model);

@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PUC", "PUC\PUC.csproj", "{7
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CounterUpdate", "CounterUpdate\CounterUpdate.csproj", "{F65ACE3E-7D03-4215-A4EB-7BF245895389}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CounterUpdate_ING", "CounterUpdate_ING\CounterUpdate_ING.csproj", "{76513E45-D094-4D70-AC49-D22E70152DD5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{F65ACE3E-7D03-4215-A4EB-7BF245895389}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F65ACE3E-7D03-4215-A4EB-7BF245895389}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F65ACE3E-7D03-4215-A4EB-7BF245895389}.Release|Any CPU.Build.0 = Release|Any CPU
+		{76513E45-D094-4D70-AC49-D22E70152DD5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{76513E45-D094-4D70-AC49-D22E70152DD5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{76513E45-D094-4D70-AC49-D22E70152DD5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{76513E45-D094-4D70-AC49-D22E70152DD5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -51,9 +51,8 @@ namespace API.Controllers
         {
             try
             {
-                if (!(context.Detail.Where(x => x.Location == model.Location && x.PartNumber == model.PartNumber).ToList().Any()))
+                if (!(context.Detail.Where(x => x.Location == model.Location && x.MachineId == model.MachineId).ToList().Any()))
                 {
-
                     await context.Database.ExecuteSqlCommandAsync(SPDetail.Detail_Add, model.MachineId, model.SupplierId, model.CategoryId, model.PartNumber, model.Location, model.Limit, model.CustomLimit, model.TriggerLimit, model.Description, model.CreatedBy);
                     return Ok(new ResponseResult(200, "Location added successfully"));
                 }

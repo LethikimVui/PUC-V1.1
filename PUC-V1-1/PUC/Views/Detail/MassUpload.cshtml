@@ -1,0 +1,87 @@
+﻿@model SharedObjects.ViewModels.SearchInputModel;
+
+@{
+    ViewData["Title"] = "Add Detail";
+    var customers = ViewData["customers"] as IEnumerable<SharedObjects.ValueObjects.VCustomer>;
+    //var categories = ViewData["categories"] as IEnumerable<SharedObjects.ValueObjects.VCategory>;
+    //var suppliers = ViewData["suppliers"] as IEnumerable<SharedObjects.ValueObjects.VSupplier>;
+    var fixtureId = ViewData["fixtureId"] as IEnumerable<SharedObjects.ValueObjects.VMain>;
+}
+<div class="container-fluid">
+    <div class="row">
+
+        <div class="col-md-12">
+
+            <!-- BEGIN EXAMPLE TABLE PORTLET-->
+
+            <div class="portlet light" style="min-height: inherit !important;">
+                <div class="portlet-title">
+
+                    <div class="caption col-md-12">
+                        <span class="caption-subject font-green-sharp bold uppercase">
+                            detail part mass upload
+                        </span>
+                    </div>
+
+                    <div class="col-md-2 pull-left">
+                        <label class="text-center bold font-green-sharp">Customer</label>
+                        <select class="form-control" id="txt-customer-search" style=" height: 34px !important; color: mediumvioletred">
+                            <option value="">--Please Select--</option>
+                            @foreach (var item in customers.OrderByDescending(c => c.CustId).ToList())
+                            {
+                                <option value=@item.CustId>@item.CustName</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="col-md-2 pull-left">
+                        <label asp-for="MachineName" class="text- bold font-green-sharp"></label>
+                        <select class="form-control" id="txt-machineName-search" style="height: 34px !important; color: mediumvioletred">
+
+                            <option value="">--Please Select Customer--</option>
+
+                        </select>
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label class="text-center bold font-green-sharp"></label>
+
+                        <input id="upload" type=file name="files[]" onclick="this.value=''" accept=".xlsx">
+                    </div>
+                    <div class="form-group col-md-1">
+                        <label class="text-center bold font-green-sharp">Triggering Limit</label>
+                        <label class="control-label"></label>
+
+                        <input id="customLimit" type="checkbox">
+                    </div>
+                    <div class="form-group col-md-12">
+                        <a class="btn btn-success" id="btn-preview">Preview</a>
+                        <a class="btn btn-success" id="btn-add" style="visibility:hidden">  Add  </a>
+                    </div>
+                    <table class="table table-bordered table-hover table-striped table-responsive">
+                        <!-- HEADING FORMATION -->
+                        <thead>
+                            <tr class="text-center">
+                                <th>No.</th>
+                                <th>Fixture ID</th>
+                                <th>Supplier</th>
+                                <th>Category</th>
+                                <th>Limit</th>
+                                <th>Location</th>
+                                <th>PartNumber</th>
+                                <th>TriggerLimit</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody id='preview-table'>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+@section Script{
+    <script src="~/js/common.js"></script>
+    <script src="~/js/detail-massupload.js"></script>
+}

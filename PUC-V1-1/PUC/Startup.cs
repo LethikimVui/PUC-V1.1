@@ -49,6 +49,7 @@ namespace PUC
             services.AddTransient<IDetailService, DetailService>();
             services.AddTransient<ILogService, LogService >();
             services.AddTransient<IRequestService, RequestService>();
+            services.AddTransient<IAssemblyService, AssemblyService>();
 
         }
 

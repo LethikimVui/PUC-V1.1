@@ -8,7 +8,7 @@
 
     var user = document.getElementById('userinfo').getAttribute('data-user');
 
-
+   
     function SearchName() {
         _ntid = $('#txt-search-input').val();
         debugger

@@ -55,6 +55,24 @@
 
             }
         })
+
+
+        $.ajax({
+            type: 'post',
+            url: '/Request/Request_Get_Approval',
+            data: JSON.stringify(model),
+            contentType: 'application/json;charset=utf-8',
+            success: function (data) {
+                debugger
+                data.results.forEach((approval) => {
+                    if (approval.ntlogin == user) {
+                        $('.btn-modal').attr("style", "visibility:visible")
+                    }
+                    
+                })
+
+            }
+        })
     }
 
     function Reject() {
@@ -65,7 +83,7 @@
         model.ReqId = parseInt(reqId);
         model.ReqNumber = "PUC-" + parseInt(reqId);
 
-        model.CreatedBy = createdby.toString();
+        model.CreatedBy = createdby;
         model.CreatedEmail = createdemail;
         model.UpdatedBy = user;
         model.UpdatedEmail = email;

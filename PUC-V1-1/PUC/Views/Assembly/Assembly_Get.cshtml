@@ -1,0 +1,78 @@
+﻿@model List<SharedObjects.ValueObjects.VAssembly>;
+@using SharedObjects.Extensions;
+@{
+    var customers = ViewData["customers"] as IEnumerable<SharedObjects.ValueObjects.VCustomer>;
+    var categories = ViewData["categories"] as IEnumerable<SharedObjects.ValueObjects.VCategory>;
+    var suppliers = ViewData["suppliers"] as IEnumerable<SharedObjects.ValueObjects.VSupplier>;
+}
+<table class="table table-bordered table-hover table-striped table-responsive">
+    <thead>
+        <tr class="text-center bold">
+            <th>No.</th>
+            <th>Customer</th>
+            <th>Fixture ID</th>
+            <th>Assembly Number</th>
+            <th>Latest Update Date</th>
+            <th>Latest Update By</th>
+            @{ if (User.IsInRole("Configuraton Admin") || User.IsInRole("SYSTEM ADMIN"))
+                {
+
+                    <th>Modification</th>
+                }
+            }
+        </tr>
+    </thead>
+    <tbody>
+        <tr class="text-center">
+            <td>New</td>
+            <td>
+                <select class="form-control" id="txt-customer" required onchange="fncOnchange1()">
+                    <option value="">Please Select</option>
+                    @foreach (var item in customers.OrderByDescending(c => c.CustId).ToList())
+                    {
+                        <option value=@item.CustId>@item.CustName</option>
+                    }
+                </select>
+            </td>
+            <td>
+                <select class="form-control" id="txt-machineName" style="height: 34px !important; color: mediumvioletred">
+                    <option value="">Please Select Customer</option>
+                </select>
+            </td>
+            <td>
+                <input id="txt-assyno" type="text" class="form-control" style="height:30px" />
+            </td>
+            <td></td>
+            <td></td>
+            <td class="text-center">
+                <a id="btn-add" class="btn default btn-xs purple update" title="Add"> <span class="glyphicon glyphicon-plus"></span></a>
+            </td>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.rc</td>
+                <td>@item.CustName</td>
+                <td>@item.MachineName</td>
+                <td>@item.AssemblyNo</td>
+                <td>@item.CreationDate</td>
+                <td>@item.CreatedBy</td>
+                @{ if (User.GetSpecificClaim("RoleId") != "-1")
+                    {
+                        <td class="text-center">
+                            <a id="btn-delete" class="btn default btn-xs purple" title="Delete" data-assyid="@item.AssyId" data-assyno="@item.AssemblyNo">  <span class="glyphicon glyphicon-trash"></span></a>
+                            @*<a id="btn-edit" class="btn default btn-xs purple" data-detailid="@item.DetailId"  data-toggle="modal" data-target="#myModal" title="Edit"> <span class="glyphicon glyphicon-edit"></span></a>*@
+                        </td>
+                    }
+                }
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+@section Script{
+
+    <script type="text/javascript" src="~/js/common-detail.js"></script>
+
+}

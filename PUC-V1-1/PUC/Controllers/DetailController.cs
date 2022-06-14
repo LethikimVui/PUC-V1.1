@@ -69,5 +69,11 @@ namespace PUC.Controllers
             var result = await detailService.Detail_Delete(model);
             return Json(new { results = result });
         }
+        public async Task<IActionResult> MassUpload()
+        {
+            var Ntlogin = User.GetSpecificClaim("Ntlogin");
+            ViewData["customers"] = await commonService.Customer_get(Ntlogin);
+            return View();
+        }
     }
 }

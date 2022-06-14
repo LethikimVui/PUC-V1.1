@@ -15,9 +15,6 @@ namespace CounterUpdate
     class Program
     {
         static private ADODB.Recordset rs = new ADODB.Recordset();
-        //private ADODB.Connection cnn = new ADODB.Connection(); 
-        //static private string ConnectionString = "Data Source=VNHCMC0SQL81;Database=PUC;User Id=PUC_USER;Password=PUC!@#123;MultipleActiveResultSets=true;";
-        //static private string connectionString = ConfigurationManager.AppSettings["ConnectionString"];
         static private string connectionString = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
         static private List<string> emails = ConfigurationManager.AppSettings["email"].Split(';').ToList();
         static private string usp_Update = ConfigurationManager.AppSettings["usp_Update"];
@@ -25,18 +22,7 @@ namespace CounterUpdate
         static private string Database_Name = ConfigurationManager.AppSettings["Database_Name"];
 
         static List<string> notRegisteredMachine = new List<string>();
-        static List<string> RegisteredMachine_no_detail = new List<string>();
-        //static List<string> list = new List<string>()
-        //    {
-        //        "BFT",
-        //        "RFT",
-        //        "CONFIG",
-        //        "DTT",
-        //        "CST",
-        //        "APTC"
-        //    };
-        static List<string> TestRouteStep = ConfigurationManager.AppSettings["TestRouteStep"].Split(',').ToList();
-        static List<string> Workcell = ConfigurationManager.AppSettings["Workcell"].Split(',').ToList();
+        static List<string> RegisteredMachine_no_detail = new List<string>();      
         static void Main(string[] args)
         {
             var section = (Hashtable)ConfigurationManager.GetSection("Config");
@@ -54,6 +40,7 @@ namespace CounterUpdate
                 //Console.WriteLine(dt1.Rows[i]["SerialNumber"] + "|" + dt1.Rows[i]["TestEquipment"] + "|" + dt1.Rows[i]["TestRoute"] + "|" + dt1.Rows[i]["TestRouteStep"] + "|" + dt1.Rows[i]["TestStartDateTime"] + "|" + dt1.Rows[i]["TestEndDateTime"] + "|" + dt1.Rows[i]["Customer_ID"] + "|" + dt1.Rows[i]["Customer"]);
                 var testStep = dt1.Rows[i]["TestRouteStep"].ToString().Split(' ').LastOrDefault();
                 var customer_ID = dt1.Rows[i]["Customer_ID"].ToString(); 
+                string test = dt1.Rows[i]["TestEquipment"].ToString();
                 string testEquipment = dt1.Rows[i]["TestEquipment"].ToString().Split(' ').LastOrDefault();
 
                 //if (TestRouteStep.Contains(testStep) || Workcell.Contains(customer_ID))
@@ -64,7 +51,7 @@ namespace CounterUpdate
                         conn.Open();
                         SqlCommand command = new SqlCommand(usp_Update, conn);
                         command.CommandType = CommandType.StoredProcedure;
-                        command.Parameters.AddWithValue("@in_machineName", testEquipment);
+                        command.Parameters.AddWithValue("@in_fixtureId", testEquipment);
                         command.Parameters.AddWithValue("@out_result", 0).Direction = ParameterDirection.Output;
 
                         command.ExecuteNonQuery();
@@ -109,16 +96,15 @@ namespace CounterUpdate
             message.From = new MailAddress("PUC@Jabil.com");
             foreach (var email in emails)
             {
-                message.To.Add(new MailAddress(email));
-
+                if (email != "")
+                {
+                    message.To.Add(new MailAddress(email));
+                }
             }
-            message.Subject = "PUC";
+            message.Subject = "[SOLAR EDGE] PUC";
             message.Body = emailContent;
             message.IsBodyHtml = true;
             smtp.Send(message);
-
-            //Console.WriteLine(list.ToString());
-
         }
     }
 }
